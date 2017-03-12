@@ -1,0 +1,395 @@
+	<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.17" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>Developing a sokoban clone with React and Redux &middot; yortuc</title>
+  
+
+  
+  <link rel="stylesheet" href="https://yortuc.github.io/css/poole.css">
+  <link rel="stylesheet" href="https://yortuc.github.io/css/syntax.css">
+  <link rel="stylesheet" href="https://yortuc.github.io/css/hyde.css">
+  <link rel="stylesheet" href="https://yortuc.github.io/css/highlight/vs.css">
+   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+   
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="yortuc" />
+</head>
+
+	<body class=" ">
+		<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://yortuc.github.io/"><h1>yortuc</h1></a>
+      <p class="lead">
+       software runs the world 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      
+      
+        <a style="margin-right: 10px;" href="https://github.com/yortuc"><i class='fa fa-github'></i></a> 
+      
+        <a style="margin-right: 10px;" href="https://twitter.com/yortuc"><i class='fa fa-twitter'></i></a> 
+      
+    </ul>
+
+    <p>&copy; 2017. All rights reserved. </p>
+  </div>
+</div>
+
+
+		<div class="content container">
+			<div class="post">
+			 	<h1>Developing a sokoban clone with React and Redux</h1>
+			  <span class="post-date">Thu, Sep 3, 2015</span>
+
+			    
+
+<iframe style="border:none; border-bottom:1px solid #ccc" src="/sokoban/index.html"  width="100%" height="540"></iframe> 
+
+<p>Please click on the map to play. Use w-a-s-d keys to move. Push green boxes on the yellow tiles. (<a href="http://yortuc.github.io/sokoban/" target="_blank">play here</a>)</p>
+
+<p>You can get the full source here : <a href="https://github.com/yortuc/ReduxSokoban">https://github.com/yortuc/ReduxSokoban</a></p>
+
+<p>Sokoban is an ancient video game if you haven&rsquo;t heard it yet.<br />
+(<a href="https://en.wikipedia.org/wiki/Sokoban">https://en.wikipedia.org/wiki/Sokoban</a>)</p>
+
+<h3 id="why">Why?</h3>
+
+<p>This project is consist of my experiments on the technologies i&rsquo;ve been playing around for a while. And i thought, it might be a useful example to see the big picture of how an ideal application architecture would be.</p>
+
+<p>This project covers,</p>
+
+<ol>
+<li><p>UI should be rendered (on DOM or wherever) as a pure reflection of application state. Application state should be the only source of truth.</p></li>
+
+<li><p>A game can be programmed in a declarative fashion leveraging powerful React component model. This approach would be more sufficient for games which have a wide range of intractable game objects.</p></li>
+
+<li><p>When the whole application state is a single tree-structured object, it can be serialised, saved and restored easily. So, we&rsquo;ll have an undo-redo mechanism and ability to save and continue the game later from the exact point where we left.</p></li>
+</ol>
+
+<p>Image shows the project architecture.</p>
+
+<p><img src="/images/concept.png" alt="react redux app structure" /></p>
+
+<h3 id="1-ui-as-a-reflection-of-application-state">1. UI as a reflection of application state</h3>
+
+<p>Our tiny application here, represents its humble UI, the game, as a drawing on a Canvas element. We don&rsquo;t need DOM nodes like most of the other web applications. So, main rendering context is the Canvas element. This is one of the biggest advantages of the React. Separation of rendering logic and rendering context. You can reflect the application state on browser as DOM nodes, on canvas element as drawings, on platforms such as iOS or Android as native components and so on.</p>
+
+<blockquote class="twitter-tweet" lang="tr"><p lang="en" dir="ltr">The virtual dom is an implementation detail of React.js. React Native demonstrates that many rendering contexts are possible.</p>&mdash; Bill Fisher (@fisherwebdev) <a href="https://twitter.com/fisherwebdev/status/560504428613337088">28 Ocak 2015</a></blockquote>
+
+<p>In the latest release of React (v0.14, <a href="https://facebook.github.io/react/blog/2015/10/07/react-v0.14.html">https://facebook.github.io/react/blog/2015/10/07/react-v0.14.html</a>), DOM context is separated from core React library. This encourages development of universal (not DOM dependent) component development and makes it easier to share functionality between React-DOM and React-Native platforms.</p>
+
+<p>We are going to render our components mostly on the Canvas element, not on the browser DOM. And also, if rendering mechanism is a pure function which takes the application state and then outputs the UI, switching from one rendering context to another will not break any other parts of the application. For instance, rendering game objects on the DOM instead of canvas as html elements, is fairly simple and won&rsquo;t require any change on any other part other than the red hexagon on the illustration above.</p>
+
+<h3 id="2-declarative-scene-creation">2. Declarative scene creation</h3>
+
+<p>At the beginning, i was planning to create a mario-like 2d side scroller. But the timing issues made the case over-complicated for me (challenge noted btw). So, i decided to implement a less dynamic game which renders only after a user input. React driven declarative component model served well in this case, imho.</p>
+
+<p>Whole game is composed with React components representing game objects. Since Sokoban has quite simple hierarchy, a more complex game which has layers, levels, different kinds of game objects can benefit more from this approach.</p>
+
+<p>Component structure goes this way:</p>
+
+<pre><code>&lt;GameContainer store={reduxSokobanStore}&gt;
+  &lt;SokobanGame&gt;
+     &lt;Game&gt;
+         {[...gameObjects]}
+     &lt;/Game&gt;
+  &lt;/SokobanGame&gt;
+&lt;/GameContainer&gt;
+</code></pre>
+
+<p>Starting with &ldquo;Game&rdquo; component, the inner part of the hierarchy is project agnostic humble game engine layer. These components are re-usable and can be used in another game development. In this project, we have only one rendering context, 2d drawing context of the Canvas element. For a more complex game, leveraging the React component model, local contexts can be created to render on achieving double buffering for a better performance.</p>
+
+<p>SokobanGame is the problem-specific, ad-hoc component composed of standard game-engine components. Also has the logic to parse application state and create game objects needed.</p>
+
+<p>Outermost component, GameContainer, is controlled by Redux to inject application state into inner elements as props. With this approach, only GameContainer component is aware of Redux. The rest doesn&rsquo;t care where the props are coming from.</p>
+
+<h4 id="i-create-rendering-context">I. Create rendering context</h4>
+
+<p>&ldquo;Game&rdquo; component will create an html Canvas element and then create the main rendering context on it.</p>
+
+<pre><code>render() { 
+    this.state.ctx &amp;&amp; this.state.ctx.clearRect(0, 0, 640, 480);
+        
+    return (
+       &lt;canvas id=&quot;game&quot; width=&quot;900&quot; height=&quot;600&quot;&gt;
+          { this.state.ctx ? this.mapChildren() : []}
+       &lt;/canvas&gt;
+    )
+} 
+</code></pre>
+
+<p>Since we don&rsquo;t have the canvas element at the beginning (in the first render method call), we should create the rendering context after the canvas element has been rendered.</p>
+
+<pre><code>componentDidMount() {
+    var c = document.getElementById(&quot;game&quot;);
+    var ctx = c.getContext(&quot;2d&quot;);
+
+    this.setState({ ctx: ctx });
+}
+</code></pre>
+
+<h4 id="ii-inject-main-rendering-context-into-child-components">II. Inject main rendering context into child components</h4>
+
+<p>We created the rendering context which all the child components will render themselves on. But, child components are not aware of the context, yet.</p>
+
+<p>To pass rendering context to the child components, React&rsquo;s context structure would be the best practice here. Since we don&rsquo;t have a deep cascading game component structure here i don&rsquo;t want to make things more complicated. And i&rsquo;ll go with a simple manual injection.</p>
+
+<p>In the render method of the &ldquo;Game&rdquo; component, inject the rendering context to its children.</p>
+
+<pre><code>mapChildren () {
+    return React.Children.map(this.props.children, function (child) {
+        return React.addons.cloneWithProps(child, {
+            ctx: this.state.ctx 
+        });
+    }.bind(this));
+}
+</code></pre>
+
+<p>And the render method of Game component</p>
+
+<pre><code>render() { 
+    this.state.ctx &amp;&amp; this.state.ctx.clearRect(0, 0, 640, 480);
+        
+    return (
+        &lt;canvas id=&quot;game&quot; width=&quot;900&quot; height=&quot;600&quot;&gt;
+            { this.state.ctx ? this.mapChildren() : []}
+        &lt;/canvas&gt;
+    )
+}
+</code></pre>
+
+<h4 id="iii-render-game-objects">III. Render game objects</h4>
+
+<p>Now, child game objects can render themselves on the main rendering context. Take rectangle component for instance. It has properties such as position, size and color. And it renders itself depending on these properties.</p>
+
+<pre><code>render() { 
+    var ctx = this.props.ctx;
+    ctx.fillStyle= this.props.color;
+    ctx.fillRect(this.props.x,this.props.y, this.props.width, this.props.height);
+    return null;
+}
+</code></pre>
+
+<p>And yes, we return null, we have nothing to do with DOM.</p>
+
+<h4 id="iv-declare-game-scene">IV. Declare game scene</h4>
+
+<p>We have game-agnostic tools to render game components. Next step is to implement specific Sokoban game. We need a data structure to describe application state at ant given time t. Application state will store Sokobal level map, positions of game objects such as walls, boxes and position of player.</p>
+
+<p>The simplest method i can think of to represent a level map like this is to use string literals. I&rsquo;ll define the map (app state) in this way:</p>
+
+<pre><code>const initialState = {
+	level: `1,1,1,1,1,1,1,1,1
+	        1,0,0,0,0,0,0,0,1
+	        1,0,0,0,3,0,0,0,1
+	        1,0,0,0,1,0,0,0,1
+	        1,0,0,1,1,1,2,0,1
+	        1,0,2,0,1,0,0,0,1
+	        1,0,0,0,3,0,0,0,1
+	        1,0,0,0,0,0,0,0,1
+	        1,1,1,1,1,1,1,1,1`,
+	playerX: 1,
+	playerY: 6
+};
+</code></pre>
+
+<p>As you guessed, numbers represent tile type.
+<em>0: walkable area, 1: wall, 2: box, 3: box placement place.</em></p>
+
+<p>We&rsquo;ll parse this string literal and create game components depending on the type and its position in the string which maps to x and y coordinates on the screen.</p>
+
+<pre><code>createMap(txtLevel) {
+   var level = txtLevel.replace(/\,/gi, '').split('\n').map(s=&gt; {
+      return s.replace(/\s/gi, '')
+   });
+
+   var tiles = [];
+   var bgcolor = [&quot;#fff&quot;, &quot;#e5e5e5&quot;];
+   var colors = [null, &quot;black&quot;, &quot;green&quot;, &quot;yellow&quot;, &quot;blue&quot;];
+   var ind = 0;
+   var color, row;
+
+   for(var i=0; i&lt;level.length; i++){
+      row = level[i];
+
+      for(var j=0; j&lt;row.length; j++){
+         color = row[j] === &quot;0&quot; ? bgcolor[(i+j)%2] : colors[row[j]];
+
+         tiles.push(
+            &lt;Rect key={++ind} x={j*50} y={i*50} color={color} /&gt;
+         );
+      } 
+   }
+
+   return tiles;
+}
+</code></pre>
+
+<p>Ok, this is not the cutest parser, but works for now. We parsed the level map and created tile components accordingly.</p>
+
+<p>And finally we can render our map on the canvas, with React.</p>
+
+<p><img src="/images/sokoban_redux.png" alt="" /></p>
+
+<h3 id="3-redux-as-a-state-manager">3. Redux as a state manager</h3>
+
+<p>Next step is to react to user input. When user interacts with application, this &ldquo;changes&rdquo; the application state. Using Redux, a new &ldquo;action&rdquo; is emitted on every user interaction. And then Redux runs the reducer function which returns a new application state depending on the previous state and received action.</p>
+
+<pre><code>(previousState, action) =&gt; newState
+</code></pre>
+
+<p>Reducer should be a pure function with no side-effects. This means, for the same inputs, always the same application state is created. This determinism makes it easier to debug your application, and trace the bug to the source.</p>
+
+<p>In the application we have 2 kinds of user interaction. Moving player and traversing in the application state history via undo and redo buttons. Redux has actions to cary messages between state container and the entity which emits the action. Actions are plain javascript objects which have to have &ldquo;type&rdquo; property.</p>
+
+<p>For instance, keyboard event handlers emit action named &ldquo;PLAYER___MOVE_REQUEST&rdquo;. This action also has the information required to move the player such as delta directions on x and y axises. The action has &ldquo;request&rdquo; in the name because every user movement is not valid. Player cant go through walls and any request that tries to go through walls aren&rsquo;t going to change application state.</p>
+
+<p>Our simple player move-request action:</p>
+
+<pre><code>// player action
+{ 
+   type: 'PLAYER_MOVE_REQUEST', 
+   dm: {   
+      dx: 1,  // delta movement on x-axis
+      dy: 0   // delta movement on y-axis
+   } 
+}
+
+// dispatched in the keyboard event handler
+// a move request for one tile left in x-direction
+store.dispatch({ type: 'PLAYER_MOVE_REQUEST', dm: {dx: -1} });
+</code></pre>
+
+<p>After the move-request action is emitted, main reducer function gets called by store.</p>
+
+<pre><code>// main reducer function
+function reactSokoban (state, action) {
+
+	switch(action.type) {
+	case 'UNDO': 
+		return appStates.length&gt;1 ? appStates[--stateIndex] :
+                                              appStates[stateIndex];
+		break;
+
+	case 'PLAYER_MOVE_REQUEST':
+		var nextState = tryToMove(state, action.dm);
+
+		if(nextState !== state){
+			pushState(nextState);
+		}
+
+		return nextState;
+		break;
+
+	default: 
+		return state;
+	}
+};
+</code></pre>
+
+<p>We check the incoming action&rsquo;s type manually and act accordingly. If action type is PLAYER___MOVE_REQUEST, a new application state is created by a sub-reducer function, <em>tryToMove(state, movement)</em>.</p>
+
+<p>A check has to be made in the tryToMove function if the requested movement is valid depending on the current game scene and movement.</p>
+
+<p>Since the level map is stored in a string template, we&rsquo;ll create an array representation out of it to make computations easier.</p>
+
+<p>The vital point here is not to mutate state. All of the operations made here are immutable. Some immutable operations might be cumbersome to do manually. Using an immutable library such as Immutable.js (again from Facebook) and Freezer.js (a lightweight alternative) would be helpful here. And again, for the sake of simplicity i&rsquo;ll do the immutable operations manually.</p>
+
+<pre><code>function tryToMove(state, dm){
+   /*
+      return new state if user action is valid
+   */
+}
+</code></pre>
+
+<p>With previous state and action to be taken, we create the next application state. Or, maybe the move-request is invalid, user is tying to go through a wall so to speak, then reducer function returns the previous state.</p>
+
+<h3 id="4-state-history-and-undo-mechanism">4. State history and undo mechanism</h3>
+
+<p>After user requested a new player movement, if the movement is valid a different state object is created. Since these are pure objects, we can check if the new state is different then previous one just with default equal operator.</p>
+
+<p>In the main reducer function, for the move-request action,</p>
+
+<pre><code>case 'PLAYER_MOVE_REQUEST':
+   var nextState = tryToMove(state, action.dm);
+
+   if(nextState !== state){
+      pushState(nextState);
+   }
+	
+   return nextState;
+   break;
+</code></pre>
+
+<p>Now we can store this states in an array and traverse with an history index. pushState function does that.</p>
+
+<pre><code>function pushState(state){
+   appStates = appStates.splice(0, stateIndex+1);
+   appStates.push(state);
+   stateIndex++;
+}
+</code></pre>
+
+<p>Since we can render any application state without performance issues, going back and forth in state history is quite simple, almost for free.</p>
+
+<p>Undo mechanism is inside the main reducer as a single line of code.</p>
+
+<pre><code>switch(action.type) {
+   case 'UNDO': 
+      return stateIndex&gt;0 ? appStates[--stateIndex] : appStates[stateIndex];
+   break;
+</code></pre>
+
+<p>Another approach to have undo-redo mechanism is to store not the states but the actions. Since actions are far more smaller objects than whole state, this would be more memory efficient. An action can be undone with applying movement in the opposite direction. And all user actions can be stored in an array, saved and replayed later.</p>
+
+<h4 id="result">Result</h4>
+
+<p>Increasing complexity of web applications is the main problem of the application  development today. With React, finally, we can program the user interface as a pure function. Only then handling the application state with immutable data structures becomes a valid option. And once we have immutable application state, taming the complex state beast becomes way simpler.</p>
+
+<p>And &ldquo;simpler&rdquo; means less errors, more comfortable debugging, more amusing development and happier developers. Happy coding!</p>
+
+			</div>
+
+			
+				<h2>Comments</h2>
+				<div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = '//yortuc-com.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+			
+		</div>
+
+  <script src="https://yortuc.github.io/js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  </body>
+</html>

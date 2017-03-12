@@ -1,0 +1,8 @@
+{
+  "version": "0.0.1",
+  "name": "caps.li",
+  "description": "caps.li caps design application",
+  "devDependencies": {
+    "express": "3.x"
+  }
+}

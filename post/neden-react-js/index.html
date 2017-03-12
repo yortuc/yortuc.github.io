@@ -1,0 +1,150 @@
+	<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.17" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>Neden React? &middot; yortuc</title>
+  
+
+  
+  <link rel="stylesheet" href="https://yortuc.github.io/css/poole.css">
+  <link rel="stylesheet" href="https://yortuc.github.io/css/syntax.css">
+  <link rel="stylesheet" href="https://yortuc.github.io/css/hyde.css">
+  <link rel="stylesheet" href="https://yortuc.github.io/css/highlight/vs.css">
+   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+   
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="yortuc" />
+</head>
+
+	<body class=" ">
+		<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://yortuc.github.io/"><h1>yortuc</h1></a>
+      <p class="lead">
+       software runs the world 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      
+      
+        <a style="margin-right: 10px;" href="https://github.com/yortuc"><i class='fa fa-github'></i></a> 
+      
+        <a style="margin-right: 10px;" href="https://twitter.com/yortuc"><i class='fa fa-twitter'></i></a> 
+      
+    </ul>
+
+    <p>&copy; 2017. All rights reserved. </p>
+  </div>
+</div>
+
+
+		<div class="content container">
+			<div class="post">
+			 	<h1>Neden React?</h1>
+			  <span class="post-date">Wed, Apr 8, 2015</span>
+
+			    
+
+<p>Hızlı cevap: <code>uygulama state</code>&lsquo;ini yönetebilmek için.</p>
+
+<h4 id="neyimiz-eksik">Neyimiz Eksik ?</h4>
+
+<p>Modern web ugulamaları için uygulama state&rsquo;lerini yönetmek ve uygulamanın bunlara cevap vermesini sağlamak gittikçe daha da zor bir hale geliyor.</p>
+
+<p>Bugüne kadar bu sorunu büyük ölçüde istemci taraflı MVC (ya da benzer MVVM, MV-whatever) yapıları ile çözmeye çalıştık. (Knockout, Angular, Backbone &hellip;)</p>
+
+<p>Geldiğimiz nokta şu:</p>
+
+<p><img src="/images/flux-react-mvc.png" alt="mvc yapısı" /></p>
+
+<p>Bir yerden sonra kim neyi güncelliyor ipin ucunu kaçırmak işten bile değil. Çünkü; uygulama state&rsquo;lerinden her birinin değişip değişmediğini ve değiştiğinde uygulamanın ne yapması gerektiğini tek tek bizim söylememiz gerekiyor. Ayrıca uygulama state&rsquo;lerinin birbirlerini güncellemesi ve kısır döngüler oluşturması da mümkün.</p>
+
+<p>Bu güne kadarki uygulamamız nasıldı? State&rsquo;deki değişimleri tespit etmeye çalışıp sadece o state&rsquo;in etkilediği UI bölgelerini güncellemeye çalışmak. Böyle yaptık çünkü DOM manüplasyonu maliyetli bir işti ve mümkün olduğunca az güncelleme yapmamız gerekiyordu.</p>
+
+<p>Durum böyle olunca, karmaşık state barındıran uygulamalarda UI&rsquo;ı ve state&rsquo;i senkronize tutabilmek başlı başına bir problem haline geldi.</p>
+
+<p>Teorik olarak en büyük sorun buydu, state değişimlerine ayak uydurmak. Ancak bunu çözerken izlediğimiz yollar da bize performans kayıpları getiriyordu. Observable yapılar ile sadece değişen state&rsquo;in etkilediği UI bölgelerini otomatik olarak güncellemek başta mantıklı gelse de ölçeklenebilir bir yaklaşım olmadığı ortadaydı (Knockout). Örneğin sayfada yirmi tane Observable bölge varsa bunları tek tek güncellemek ciddi performans kaybı demektir. Angular&rsquo;ın dirty checking yaklaşımı göreceli olarak performanslı olsa da gerekli gereksiz her yerde state değişikliklerini yine de biz izlemek durumundaydık.</p>
+
+<h2 id="react-ne-vaadediyor">React Ne Vaadediyor?</h2>
+
+<p>Sorunumuz bu. State değişikliklerini tespit etmekte ve UI&rsquo;ı bu state&rsquo;i temsil edecek şekilde senkron etmekte zorlanıyoruz. <strong>React diyor ki, state değişikliklerini tespit etme!</strong> Uygulama state&rsquo;inde en ufak bir değişimde tüm UI&rsquo;ı tekrar oluştur. Neyin değişip neyin değişmediğiyle ilgilenme.</p>
+
+<p>Ne kadar performanslı değil mi? Biz daha önce sadece kısmi güncellemeler yaparken performans sorunları yaşarken, şimdi uygulama state&rsquo;i içerisinde en ufak bir değişimde tüm UI&rsquo;ı tekrar oluşturacağız.</p>
+
+<p>Bu yaklaşım aslında tanıdık. Sunucu taraflı UI rendering&rsquo;i tam da böyle yapıyoruz. Bu açıdan state değişimleri uygulamada karmaşaya yol açmıyor. Peki bu yaklaşımı client tarafında uygulamayı daha önce niye hiç düşünmedik? Çünkü DOM manipülasyonu zaten çok maliyetli iken tüm UI&rsquo;ı tekrar oluşturmak mantıklı değildi, tabi eğer UI rendering işlemini direk olarak DOM üzerine yapıyorsanız!</p>
+
+<h4 id="pür-fonksiyon-şeklinde-ui">Pür fonksiyon şeklinde UI</h4>
+
+<p>React&rsquo;in getirdiği aslında en radikal yaklaşım burada. React, her seferinde tüm UI baştan render ediyor evet, ama direk olarak DOM üzerine değil. Browser hafızasında yaşayan sanal bir DOM üzerine tüm UI&rsquo;ı render ediyor. Daha sonra bu sanal DOM, state değişmeden bir önceki sanal DOM ile karşılaştırılıyor. Aradaki farkı yaratacak minimum gerçek DOM manipülasyonları hesaplanıyor. Daha sonra React gerçek browser DOM&rsquo;unu bu minimum operasyonlar ile enaz maliyetle bir kerede güncelliyor. Muazzam bir soyutlama katmanı (Layer of abstraction, <a href="http://en.wikipedia.org/wiki/Abstraction_layer">http://en.wikipedia.org/wiki/Abstraction_layer</a>)</p>
+
+<p>Web uygulaması geliştiren programcı olarak biz, state değişimlerinin tespiti ve bu değişimlere nasıl tepki verilmesi gerektiği gibi konularda kafa yormamış oluyoruz, sadece tüm uygulamayı yeni state&rsquo;i temsile edecek şekilde baştan render ediyoruz.</p>
+
+<p><img src="/images/f_ui.png" alt="Pür fonksiyon şeklinde UI" /></p>
+
+<p>Bu sayede tüm UI bir pür fonksiyon (pure function, <a href="http://en.wikipedia.org/wiki/Pure_function">http://en.wikipedia.org/wiki/Pure_function</a>) şeklini alıyor. Yani verilen bir stete için her zaman aynı çıktıyı üretiyor.</p>
+
+<p>Bu yaklaşım tabi ki ideal olanı. Uygulama bileşenlerini birer pür fonksiyon şeklinde yapılandırmak programcıya düşüyor, React&rsquo;ın bir zorlayıcılığı yok. Gerçek hayat şartlarında tüm uygulama bileşenlerini pür olarak yapılandırmak da gerçekçi değil, özellikle kullanıcı müdahalesi olan kısımlarda.</p>
+
+<p>Şunu da belirtmem gerekir ki, burada bahsettiğm yaklaşım &ldquo;ideal&rdquo; React uygulamaları için geçerli. Mevcut mvc yapısı olan bir uygulamaya React&rsquo;i entegre etmek de mümkün. Örneğin yüksek DOM performansı gerektiren view bölgelerinde Angular&rsquo;in view katmanı olarak React&rsquo;in kullanıldığı görülmekte.</p>
+
+<h4 id="performans">Performans</h4>
+
+<p>İlk olarak DOM güncellemede React&rsquo;in nasıl bir performans artışı getirdiğini gördük. Buna ek olarak, React&rsquo;in tüm UI&rsquo;ı tekrar render etme yaklaşımı beraberinde ölçeklenebiliriği de getiriyor. Yani on güncelleme yapmak ile yirmi güncelleme yapmak arasında üstel bir maliyet farkı bulunmuyor, doğrusal bir rendering süresi artışı sözkonusu.</p>
+
+<p>Sadece iki görev üstlenen React&rsquo;in ikinci görevi ise browser event&rsquo;lerine cevap vermektir. Bu noktada da güzel bir yaklaşım sergilemişler ve sentetik event&rsquo;ler oluşturmuşlar. React nesneleri üzerinde oluşan event&rsquo;ler aslında gerçek browser event&rsquo;leri değil. React sayfa çapında tek bir event delegasyonu ile tüm olan olayları yakalayıp ilgili nesnelere bu olayları uyarı olarak gönderiyor.</p>
+
+<p>DOM manipülasyonundan sonra web uygulaması performansını düşüren bir diğer unsur event listener&rsquo;lardır. Ne kadar fazla DOM node&rsquo;u event-listener&rsquo;e sahipse browser üzerinde o kadar yük oluşur. React&rsquo;in yaklaşımı sayesinde tüm uygulama sadece bir tane event-listener ile idare edilmiş oluyor. Ve yine buna ek olarak, oluşan event&rsquo;leri React sentetik olarak üretip dispatch ettiği için cross-browser bir hale getirerek bunu yapabiliyor. Uygulamayı hangi browser üzerinde çalıştırdığınızdan bağımsız olarak bir event oluştuğunda elinize düşen event nesnesi standardize edilmiş bir yapıda oluyor.</p>
+
+<h4 id="izomorfizm">Izomorfizm</h4>
+
+<p>Tüm UI&rsquo;ı sanal bir biçimde ifade ettiğimize göre, bu soyut ağaç yapısını istersek browser DOM node&rsquo;larına dönüştürüp istemci tarafında UI&rsquo;ı render edebiliriz ya da başka bir şekilde kullanabiliriz. Mesela sunucu tarafında html string&rsquo;i oluşturup, aynı UI&rsquo;ı sunucu tarafında oluşturabilir, istemciye önceden render edilmiş bir sayfa gösterebiliriz.</p>
+
+<p>Bunu yaklaşımı instagram şuan uyguluyor. Sayfada herhangi bir resme tıkladığınızda bu resim daha büyük olacak şekilde istemci tarafında render edilen bir UI üzerinde gösteriliyor. Bu state değişikliği URL&rsquo;e de yansıyor. Bu URL&rsquo;i alıp browser penceresine yapıştırdığınızda ise bu state sunucuda render edilmiş haliyle karşınıza geliyor. Sunucuda ve istemcide çalışabilen bir rendering yaklaşımı!</p>
+
+<h4 id="sonuç">Sonuç</h4>
+
+<p>Getirdiği yaklaşım ile React, bence web uygulamalarının geleceğidir. Sanal DOM ağacı ile oluşturulan soyutlama katmanı sayesinde uygulama bileşenlerini browser DOM&rsquo;una render edilebilmekte, sunucuda html çıktısı üretebilmekte ve hatta native mobil uygulama arayüzleri oluşturulabilmekte. IOS için React Native henüz yeni yayınlandı (<a href="http://facebook.github.io/react-native/">http://facebook.github.io/react-native/</a>). Sanıyorum yakında çok daha farklı kullanım alanları da görebileceğiz.</p>
+
+			</div>
+
+			
+				<h2>Comments</h2>
+				<div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = '//yortuc-com.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+			
+		</div>
+
+  <script src="https://yortuc.github.io/js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  </body>
+</html>
