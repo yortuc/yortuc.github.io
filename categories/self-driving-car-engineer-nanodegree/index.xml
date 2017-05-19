@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>yortuc</title>
+    <link>https://yortuc.github.io/categories/self-driving-car-engineer-nanodegree/index.xml</link>
+    <description>Recent content on yortuc</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="https://yortuc.github.io/categories/self-driving-car-engineer-nanodegree/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Udacity self driving car engineer nanodegree Term-1</title>
+      <link>https://yortuc.github.io/post/udacity-sdcend-deadlines/</link>
+      <pubDate>Fri, 19 May 2017 07:35:38 +0300</pubDate>
+      
+      <guid>https://yortuc.github.io/post/udacity-sdcend-deadlines/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve involved in Udacity&amp;rsquo;s Self diring car nanodegree May cohort.
+Here are the recommended due dates for term1 projects.
+I&amp;rsquo;m very exiceted and can&amp;rsquo;t wait to study on them.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Project&lt;/th&gt;
+&lt;th&gt;Due&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Finding Lane Lines&lt;/td&gt;
+&lt;td&gt;June 1&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Traffic Sign Classification&lt;/td&gt;
+&lt;td&gt;July 3&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Behavioral Cloning&lt;/td&gt;
+&lt;td&gt;July 24&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Advanced Lane Finding&lt;/td&gt;
+&lt;td&gt;August 7&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Vehicle Tracking&lt;/td&gt;
+&lt;td&gt;August 21&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;End of Term 1&lt;/td&gt;
+&lt;td&gt;September 4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
