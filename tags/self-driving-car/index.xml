@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>yortuc</title>
-    <link>https://yortuc.github.io/tags/self-driving-car/index.xml</link>
+    <link>http://yortuc.com/tags/self-driving-car/index.xml</link>
     <description>Recent content on yortuc</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="https://yortuc.github.io/tags/self-driving-car/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://yortuc.com/tags/self-driving-car/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Udacity self driving car engineer nanodegree Term-1</title>
-      <link>https://yortuc.github.io/post/udacity-sdcend-deadlines/</link>
+      <link>http://yortuc.com/post/udacity-sdcend-deadlines/</link>
       <pubDate>Fri, 19 May 2017 07:35:38 +0300</pubDate>
       
-      <guid>https://yortuc.github.io/post/udacity-sdcend-deadlines/</guid>
+      <guid>http://yortuc.com/post/udacity-sdcend-deadlines/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve involved in Udacity&amp;rsquo;s Self diring car nanodegree May cohort.
 Here are the recommended due dates for term1 projects.
 I&amp;rsquo;m very exiceted and can&amp;rsquo;t wait to study on them.&lt;/p&gt;

@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>yortuc</title>
-    <link>https://yortuc.github.io/index.xml</link>
+    <link>http://yortuc.com/index.xml</link>
     <description>Recent content on yortuc</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 19 May 2017 07:35:38 +0300</lastBuildDate>
-    <atom:link href="https://yortuc.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://yortuc.com/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Udacity self driving car engineer nanodegree Term-1</title>
-      <link>https://yortuc.github.io/post/udacity-sdcend-deadlines/</link>
+      <link>http://yortuc.com/post/udacity-sdcend-deadlines/</link>
       <pubDate>Fri, 19 May 2017 07:35:38 +0300</pubDate>
       
-      <guid>https://yortuc.github.io/post/udacity-sdcend-deadlines/</guid>
+      <guid>http://yortuc.com/post/udacity-sdcend-deadlines/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve involved in Udacity&amp;rsquo;s Self diring car nanodegree May cohort.
 Here are the recommended due dates for term1 projects.
 I&amp;rsquo;m very exiceted and can&amp;rsquo;t wait to study on them.&lt;/p&gt;
@@ -64,10 +64,10 @@ I&amp;rsquo;m very exiceted and can&amp;rsquo;t wait to study on them.&lt;/p&gt;
     
     <item>
       <title>About</title>
-      <link>https://yortuc.github.io/post/about/</link>
+      <link>http://yortuc.com/post/about/</link>
       <pubDate>Mon, 16 Jan 2017 16:11:58 +0530</pubDate>
       
-      <guid>https://yortuc.github.io/post/about/</guid>
+      <guid>http://yortuc.com/post/about/</guid>
       <description>&lt;ol&gt;
 &lt;li&gt;Studied Aerospace Engineering, Computational Aerodynamics&lt;/li&gt;
 &lt;li&gt;Worked in defense industry for three years in R&amp;amp;D&lt;/li&gt;
@@ -80,13 +80,13 @@ I&amp;rsquo;m very exiceted and can&amp;rsquo;t wait to study on them.&lt;/p&gt;
     
     <item>
       <title>Developing a sokoban clone with React and Redux</title>
-      <link>https://yortuc.github.io/post/developing-a-sokoban-clone-with-redux-and-react/</link>
+      <link>http://yortuc.com/post/developing-a-sokoban-clone-with-redux-and-react/</link>
       <pubDate>Thu, 03 Sep 2015 16:11:58 +0530</pubDate>
       
-      <guid>https://yortuc.github.io/post/developing-a-sokoban-clone-with-redux-and-react/</guid>
+      <guid>http://yortuc.com/post/developing-a-sokoban-clone-with-redux-and-react/</guid>
       <description>
 
-&lt;iframe style=&#34;border:none; border-bottom:1px solid #ccc&#34; src=&#34;https://yortuc.github.io/sokoban/index.html&#34;  width=&#34;100%&#34; height=&#34;540&#34;&gt;&lt;/iframe&gt; 
+&lt;iframe style=&#34;border:none; border-bottom:1px solid #ccc&#34; src=&#34;http://yortuc.com/sokoban/index.html&#34;  width=&#34;100%&#34; height=&#34;540&#34;&gt;&lt;/iframe&gt; 
 
 &lt;p&gt;Please click on the map to play. Use w-a-s-d keys to move. Push green boxes on the yellow tiles. (&lt;a href=&#34;http://yortuc.github.io/sokoban/&#34; target=&#34;_blank&#34;&gt;play here&lt;/a&gt;)&lt;/p&gt;
 
@@ -111,7 +111,7 @@ I&amp;rsquo;m very exiceted and can&amp;rsquo;t wait to study on them.&lt;/p&gt;
 
 &lt;p&gt;Image shows the project architecture.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://yortuc.github.io/images/concept.png&#34; alt=&#34;react redux app structure&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yortuc.com/images/concept.png&#34; alt=&#34;react redux app structure&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;1-ui-as-a-reflection-of-application-state&#34;&gt;1. UI as a reflection of application state&lt;/h3&gt;
 
@@ -272,7 +272,7 @@ I&amp;rsquo;m very exiceted and can&amp;rsquo;t wait to study on them.&lt;/p&gt;
 
 &lt;p&gt;And finally we can render our map on the canvas, with React.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://yortuc.github.io/images/sokoban_redux.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yortuc.com/images/sokoban_redux.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;3-redux-as-a-state-manager&#34;&gt;3. Redux as a state manager&lt;/h3&gt;
 
@@ -395,10 +395,10 @@ function reactSokoban (state, action) {
     
     <item>
       <title>Neden React?</title>
-      <link>https://yortuc.github.io/post/neden-react-js/</link>
+      <link>http://yortuc.com/post/neden-react-js/</link>
       <pubDate>Wed, 08 Apr 2015 16:11:58 +0530</pubDate>
       
-      <guid>https://yortuc.github.io/post/neden-react-js/</guid>
+      <guid>http://yortuc.com/post/neden-react-js/</guid>
       <description>
 
 &lt;p&gt;Hızlı cevap: &lt;code&gt;uygulama state&lt;/code&gt;&amp;lsquo;ini yönetebilmek için.&lt;/p&gt;
@@ -411,7 +411,7 @@ function reactSokoban (state, action) {
 
 &lt;p&gt;Geldiğimiz nokta şu:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://yortuc.github.io/images/flux-react-mvc.png&#34; alt=&#34;mvc yapısı&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yortuc.com/images/flux-react-mvc.png&#34; alt=&#34;mvc yapısı&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Bir yerden sonra kim neyi güncelliyor ipin ucunu kaçırmak işten bile değil. Çünkü; uygulama state&amp;rsquo;lerinden her birinin değişip değişmediğini ve değiştiğinde uygulamanın ne yapması gerektiğini tek tek bizim söylememiz gerekiyor. Ayrıca uygulama state&amp;rsquo;lerinin birbirlerini güncellemesi ve kısır döngüler oluşturması da mümkün.&lt;/p&gt;
 
@@ -435,7 +435,7 @@ function reactSokoban (state, action) {
 
 &lt;p&gt;Web uygulaması geliştiren programcı olarak biz, state değişimlerinin tespiti ve bu değişimlere nasıl tepki verilmesi gerektiği gibi konularda kafa yormamış oluyoruz, sadece tüm uygulamayı yeni state&amp;rsquo;i temsile edecek şekilde baştan render ediyoruz.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://yortuc.github.io/images/f_ui.png&#34; alt=&#34;Pür fonksiyon şeklinde UI&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yortuc.com/images/f_ui.png&#34; alt=&#34;Pür fonksiyon şeklinde UI&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Bu sayede tüm UI bir pür fonksiyon (pure function, &lt;a href=&#34;http://en.wikipedia.org/wiki/Pure_function&#34;&gt;http://en.wikipedia.org/wiki/Pure_function&lt;/a&gt;) şeklini alıyor. Yani verilen bir stete için her zaman aynı çıktıyı üretiyor.&lt;/p&gt;
 
