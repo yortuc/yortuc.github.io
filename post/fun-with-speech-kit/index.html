@@ -1,0 +1,172 @@
+	<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.17" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>Fun with SpeechKit - WordRun: Speech recognition gamified &middot; yortuc</title>
+  
+
+  
+  <link rel="stylesheet" href="http://yortuc.com/css/poole.css">
+  <link rel="stylesheet" href="http://yortuc.com/css/syntax.css">
+  <link rel="stylesheet" href="http://yortuc.com/css/hyde.css">
+  <link rel="stylesheet" href="http://yortuc.com/css/highlight/vs.css">
+   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+   
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="yortuc" />
+</head>
+
+	<body class=" ">
+		<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://yortuc.com/"><h1>yortuc</h1></a>
+      <p class="lead">
+       software runs the world 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      
+      
+        <a style="margin-right: 10px;" href="https://github.com/yortuc"><i class='fa fa-github'></i></a> 
+      
+        <a style="margin-right: 10px;" href="https://twitter.com/yortuc"><i class='fa fa-twitter'></i></a> 
+      
+        <a style="margin-right: 10px;" href="/post/about/">About</a> 
+      
+    </ul>
+
+    <p>&copy; 2017. All rights reserved. </p>
+  </div>
+</div>
+
+
+		<div class="content container">
+			<div class="post">
+			 	<h1>Fun with SpeechKit - WordRun: Speech recognition gamified</h1>
+			  <span class="post-date">Sun, Dec 4, 2016</span>
+
+			    
+
+<blockquote>
+<p>Speaking (Pronunciation) practice game for iOS using Speech api.</p>
+</blockquote>
+
+<h3 id="why">Why?</h3>
+
+<p>With a little research, i couldn&rsquo;t find enough tools for speaking. Pronunciation especially. Thinking lack of a speaking-practicing app with the brand new iOS 10 voice recognition api, i thought it might make a small but useful and also amusing game. I call it <strong>WordRun</strong>.</p>
+
+<p>The name contains <code>run</code>, because it&rsquo;s like an endless running game. You see the word on screen and pronunciate it properly. It&rsquo;s no big deal for a native speaker but can be tricky for foreigners. If you say the word correctly, game continues endlessly. If you fail, you loose one life. You have 3 lives and then you die.</p>
+
+<h3 id="how">How?</h3>
+
+<p>Since this is a tiny weekend project, core is only consist of recognizing a given word by Speech api.</p>
+
+<ol>
+<li><p>init endless run: grant required permissions to use microphone and speech api. create <code>SFSpeechRecognizer</code> and <code>AVAudioEngine</code>.</p></li>
+
+<li><p>create a <code>SFSpeechAudioBufferRecognitionRequest</code> for a given word with <code>shouldReportPartialResults</code> set to <code>true</code> and <code>contextualStrings</code> to narrow down the focus on word.</p></li>
+
+<li><p>check if result returned from Speech api is equeal to the word given. If so, user pronunciated the word correctly, move on the next word and goto step 1.</p></li>
+</ol>
+
+<p>I have a plan using text-to-speech for wrong pronunciations, and make user learn the correct one. Bu it seems like so many people are having problems with running <code>AVSpeechSynthesizer</code> in iOS 10, including me unfortunately.</p>
+
+<p>Also i created controllers for each domain. Like <code>SpeechController</code>. Just to create skinny view controllers. In mvc design pattern, you better have as little code as possible in view controller, not to repeat yourself. Anc in iOS, it&rsquo;s a very common mistake to create fat view-controllers, which is called Massive view controller.</p>
+
+<h3 id="scroll-segue">Scroll Segue</h3>
+
+<pre><code class="language-swift">class SegueFromLeft: UIStoryboardSegue
+{
+    override func perform()
+    {
+        let src = self.source
+        let dst = self.destination
+        
+        src.view.superview?.insertSubview(dst.view, aboveSubview: src.view)
+        dst.view.transform = CGAffineTransform(translationX: src.view.frame.size.width, y: 0)
+        
+        UIView.animate(withDuration: 0.40,
+                       delay: 0.0,
+                       options: UIViewAnimationOptions.transitionFlipFromLeft,
+                       animations: {
+                            dst.view.transform = CGAffineTransform(translationX: 0, y: 0)
+                       }) { finished in
+                            src.present(dst, animated: false, completion: nil)
+                       }
+        
+        UIView.animate(withDuration: 0.40,
+                       delay: 0.0,
+                       options: UIViewAnimationOptions.transitionFlipFromRight,
+                       animations: {
+                            src.view.transform = CGAffineTransform(translationX: -src.view.frame.width, y: 0)
+                       },
+                       completion: nil)
+    }
+}
+</code></pre>
+
+<h3 id="polishing">Polishing</h3>
+
+<p>iOS 10 setup screen is consist of text only. So, this is an increasing trend in design. Clear and open interface with intents are driven by typography.</p>
+
+<p>Only polish WordRun has is animations.</p>
+
+<ul>
+<li>Slide animation</li>
+<li>Shake animation</li>
+<li>Explode animation</li>
+</ul>
+
+<p>While moving to next word, it slides from the right side of the screen. And it&rsquo;s done by <code>CATransition</code>. If the pronunciation was wrong, then the word on the screen shakes with <code>CAKeyframeAnimation</code>. And user looses a live, so the heart icon should explore and fall into pieces. With the help of cool <a href="https://github.com/xxycode/UIViewXXYBoom">UIViewXXYBoom</a> library.</p>
+
+<h3 id="get-the-app">Get the app</h3>
+
+<p>I&rsquo;ll send the app to AppStore as soon as possible.</p>
+
+<h3 id="get-the-code">Get the code</h3>
+
+<p>Code is in my repo. You can <a href="https://github.com/yortuc/WordRun">check it out</a>.</p>
+
+			</div>
+
+			
+				<h2>Comments</h2>
+				<div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = '//yortuc-com.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+			
+		</div>
+
+  <script src="http://yortuc.com/js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  </body>
+</html>

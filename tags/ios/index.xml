@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>yortuc</title>
+    <link>http://yortuc.com/tags/ios/index.xml</link>
+    <description>Recent content on yortuc</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://yortuc.com/tags/ios/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Fun with SpeechKit - WordRun: Speech recognition gamified</title>
+      <link>http://yortuc.com/post/fun-with-speech-kit/</link>
+      <pubDate>Sun, 04 Dec 2016 16:11:58 +0530</pubDate>
+      
+      <guid>http://yortuc.com/post/fun-with-speech-kit/</guid>
+      <description>
+
+&lt;blockquote&gt;
+&lt;p&gt;Speaking (Pronunciation) practice game for iOS using Speech api.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;why&#34;&gt;Why?&lt;/h3&gt;
+
+&lt;p&gt;With a little research, i couldn&amp;rsquo;t find enough tools for speaking. Pronunciation especially. Thinking lack of a speaking-practicing app with the brand new iOS 10 voice recognition api, i thought it might make a small but useful and also amusing game. I call it &lt;strong&gt;WordRun&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The name contains &lt;code&gt;run&lt;/code&gt;, because it&amp;rsquo;s like an endless running game. You see the word on screen and pronunciate it properly. It&amp;rsquo;s no big deal for a native speaker but can be tricky for foreigners. If you say the word correctly, game continues endlessly. If you fail, you loose one life. You have 3 lives and then you die.&lt;/p&gt;
+
+&lt;h3 id=&#34;how&#34;&gt;How?&lt;/h3&gt;
+
+&lt;p&gt;Since this is a tiny weekend project, core is only consist of recognizing a given word by Speech api.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;init endless run: grant required permissions to use microphone and speech api. create &lt;code&gt;SFSpeechRecognizer&lt;/code&gt; and &lt;code&gt;AVAudioEngine&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;create a &lt;code&gt;SFSpeechAudioBufferRecognitionRequest&lt;/code&gt; for a given word with &lt;code&gt;shouldReportPartialResults&lt;/code&gt; set to &lt;code&gt;true&lt;/code&gt; and &lt;code&gt;contextualStrings&lt;/code&gt; to narrow down the focus on word.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;check if result returned from Speech api is equeal to the word given. If so, user pronunciated the word correctly, move on the next word and goto step 1.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I have a plan using text-to-speech for wrong pronunciations, and make user learn the correct one. Bu it seems like so many people are having problems with running &lt;code&gt;AVSpeechSynthesizer&lt;/code&gt; in iOS 10, including me unfortunately.&lt;/p&gt;
+
+&lt;p&gt;Also i created controllers for each domain. Like &lt;code&gt;SpeechController&lt;/code&gt;. Just to create skinny view controllers. In mvc design pattern, you better have as little code as possible in view controller, not to repeat yourself. Anc in iOS, it&amp;rsquo;s a very common mistake to create fat view-controllers, which is called Massive view controller.&lt;/p&gt;
+
+&lt;h3 id=&#34;scroll-segue&#34;&gt;Scroll Segue&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;class SegueFromLeft: UIStoryboardSegue
+{
+    override func perform()
+    {
+        let src = self.source
+        let dst = self.destination
+        
+        src.view.superview?.insertSubview(dst.view, aboveSubview: src.view)
+        dst.view.transform = CGAffineTransform(translationX: src.view.frame.size.width, y: 0)
+        
+        UIView.animate(withDuration: 0.40,
+                       delay: 0.0,
+                       options: UIViewAnimationOptions.transitionFlipFromLeft,
+                       animations: {
+                            dst.view.transform = CGAffineTransform(translationX: 0, y: 0)
+                       }) { finished in
+                            src.present(dst, animated: false, completion: nil)
+                       }
+        
+        UIView.animate(withDuration: 0.40,
+                       delay: 0.0,
+                       options: UIViewAnimationOptions.transitionFlipFromRight,
+                       animations: {
+                            src.view.transform = CGAffineTransform(translationX: -src.view.frame.width, y: 0)
+                       },
+                       completion: nil)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;polishing&#34;&gt;Polishing&lt;/h3&gt;
+
+&lt;p&gt;iOS 10 setup screen is consist of text only. So, this is an increasing trend in design. Clear and open interface with intents are driven by typography.&lt;/p&gt;
+
+&lt;p&gt;Only polish WordRun has is animations.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Slide animation&lt;/li&gt;
+&lt;li&gt;Shake animation&lt;/li&gt;
+&lt;li&gt;Explode animation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;While moving to next word, it slides from the right side of the screen. And it&amp;rsquo;s done by &lt;code&gt;CATransition&lt;/code&gt;. If the pronunciation was wrong, then the word on the screen shakes with &lt;code&gt;CAKeyframeAnimation&lt;/code&gt;. And user looses a live, so the heart icon should explore and fall into pieces. With the help of cool &lt;a href=&#34;https://github.com/xxycode/UIViewXXYBoom&#34;&gt;UIViewXXYBoom&lt;/a&gt; library.&lt;/p&gt;
+
+&lt;h3 id=&#34;get-the-app&#34;&gt;Get the app&lt;/h3&gt;
+
+&lt;p&gt;I&amp;rsquo;ll send the app to AppStore as soon as possible.&lt;/p&gt;
+
+&lt;h3 id=&#34;get-the-code&#34;&gt;Get the code&lt;/h3&gt;
+
+&lt;p&gt;Code is in my repo. You can &lt;a href=&#34;https://github.com/yortuc/WordRun&#34;&gt;check it out&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
