@@ -1,0 +1,121 @@
+<html>
+	<head>
+		<title>KONAMI CODE</title>
+		<style type="text/css">
+			body{
+				font-size: 60px; 
+				font-family: sans-serif;	
+			}
+			.fullScreen{
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+			}
+			.fullScreen>div{   
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				text-align: center;
+			 }
+			.goo{
+				color: #fff;
+				background-color: #3498db;
+			}
+			.hidden{
+				background-color: #f1c40f;
+				color: #c0392b;
+				text-transform: uppercase;
+				display: none;
+				font-weight: bold;
+			}
+			.counter{
+				width: 20px;
+				height: 20px;
+				position: absolute;
+				top: 50px;
+				left: 50px;
+				border-radius: 40px;
+				text-align: center;
+				line-height: 20px;
+				font-size: 14px;
+				color: #fff;
+				background-color: #000;
+				z-index: 100;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="counter">0</div>
+		
+		<div class="fullScreen goo">
+			<div>you know what to do</div>
+		</div>
+
+		<div class="fullScreen hidden">
+			<div>unlocked! you have unlimited of lives now!</div>
+		</div>
+
+		<script>
+			/*
+				wait a key (waiting state, key_index = 0)
+				if a key comes, check if seq[key_index] = keyCode
+					if true, increase key_index by one, 
+						clear previous timeout if there is one
+						setTimeout to 500
+							if timeout fires, set key_index to zero
+					if not, set key_index to zero
+			*/
+
+			function unlock() {
+				console.log("WON!!!!");
+				document.querySelector(".hidden").style.display = "block";
+				document.querySelector(".goo").style.display = "none";
+			}
+
+			const UP 	= 38,
+				  DOWN 	= 40,
+				  LEFT 	= 37,
+				  RIGHT = 39,
+				  ENTER = 13,
+				  B 	= 66,
+				  A 	= 65;
+
+			const seq = [UP, UP, DOWN, DOWN, LEFT, RIGHT, LEFT, RIGHT, B, A, ENTER];
+
+			let keyIndex = 0;
+			let timeout;
+
+			function keyUp(event) {
+				const code = event.keyCode;
+				
+				if(seq[keyIndex] === code){
+					console.log("go");
+					keyIndex++;
+
+					console.log(keyIndex);
+
+					if(keyIndex === seq.length) {
+						unlock();
+						return;
+					}
+
+					if(timeout) clearTimeout(timeout);
+					timeout = setTimeout(()=> { keyIndex = 0; }, 500)
+				}
+				else{
+					keyIndex = 0;
+				}
+
+				document.querySelector(".counter").innerText = keyIndex;
+			}
+
+			window.addEventListener("keyup", keyUp)
+
+		</script>
+	</body>
+</html>
