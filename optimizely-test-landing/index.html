@@ -1,17 +1,27 @@
 <html>
     <head>
-        <script src="https://cdn.optimizely.com/js/10298400644.js"></script>
+        <script src="//cdn.optimizely.com/js/10298400644.js"></script>
     </head>
 
     <body>
         
         <h1>A/B Test Experimentation</h1>
 
+        <h3>Current bucket:</h3>
+        <b id="bucket"></b>
+
         <input type="text"><button>Search</button>
 
         <script>
-            document.onload = function(){
-                console.log(window['optimizely']);
+            window.onload = function(){
+                const currentBucketId = optimizely.get('state').getVariationMap()['10287132795'].id;
+
+                if(currentBucketId === '10290332967'){
+                    document.getElementById('bucket').innerText = 'Original';
+                }
+                else{
+                    document.getElementById('bucket').innerText = 'Variation #1';
+                }
             }
         </script>
     </body>
