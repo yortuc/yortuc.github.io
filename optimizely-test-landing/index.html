@@ -13,15 +13,27 @@
         <input type="text"><button>Search</button>
 
         <script>
+            let currentBucketId;
             window.onload = function(){
-                const currentBucketId = optimizely.get('state').getVariationMap()['10287132795'].id;
-
+                currentBucketId = optimizely.get('state').getVariationMap()['10287132795'].id;
+                const bucketDiv = document.getElementById('bucket');
                 if(currentBucketId === '10290332967'){
-                    document.getElementById('bucket').innerText = 'Original';
+                    bucketDiv.innerText = 'Original';
                 }
                 else{
-                    document.getElementById('bucket').innerText = 'Variation #1';
+                    bucketDiv.innerText = 'Variation #1';
                 }
+            }
+
+            function trackOnEnter(){
+                window['optimizely'] = window['optimizely'] || [];
+                window['optimizely'].push({
+                    type: "event",
+                    eventName: "ON_ENTER",
+                    tags: {
+                        currentBucketId
+                    }
+                });
             }
         </script>
     </body>
