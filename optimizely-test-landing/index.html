@@ -10,10 +10,11 @@
         <h3>Current bucket:</h3>
         <b id="bucket"></b>
 
-        <input type="text"><button>Search</button>
+        <input type="text" id="search"><button>Search</button>
 
         <script>
             let currentBucketId;
+
             window.onload = function(){
                 currentBucketId = optimizely.get('state').getVariationMap()['10287132795'].id;
                 const bucketDiv = document.getElementById('bucket');
@@ -23,15 +24,22 @@
                 else{
                     bucketDiv.innerText = 'Variation #1';
                 }
+
+                document.getElementById('search').onkeydown = function(e){
+                    if(event.key === 'Enter') {
+                        trackOnEnter(e.target.value);       
+                    }
+                }
             }
 
-            function trackOnEnter(){
+            function trackOnEnter(term){
                 window['optimizely'] = window['optimizely'] || [];
                 window['optimizely'].push({
                     type: "event",
                     eventName: "ON_ENTER",
                     tags: {
-                        currentBucketId
+                        currentBucketId,
+                        term
                     }
                 });
             }
