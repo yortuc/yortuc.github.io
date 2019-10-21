@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="description" content="backGame">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>backGame</title>
+  <style>
+    .selected {background-color:black; color: white}
+    span { font-family: 'Courier New', Courier, monospace; padding: 2px; border:1px solid black}
+  </style>
+</head>
+<body>
+<div style="margin-bottom: 5px">
+  <span id="mapsize">m: MAP SIZE</span>
+  <span id="b0">0: EMPTY_CELL</span>
+  <span id="b1" class="selected">1: WALL</span>
+  <span id="b2">2: PLAYER</span>
+  <span id="b3">3: PORTAL</span>
+  <span id="b4">4: NON_CELL</span>
+  <span id="b6">6: ENEMY_ANT</span>
+  <span id="b8">8: LAKE</span>
+  <span id="b9">9: BOAT</span>
+  <span id="play">p: PLAY</span>
+</div>
+<canvas id="c" width="600" height="500"></canvas>
+<pre id="p" style="width: 200px;position: absolute;top: 50px;left: 500px;"></pre>
+<script src="editor.js" type="module"></script>
+</body>
+</html>
