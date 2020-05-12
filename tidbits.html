@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Simbe 0.1" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  
+  <title>yortuc</title> 
+  
+  <style>
+	body {
+		font-family: verdana;
+		line-height: 1.7;
+		padding:0;
+		margin:0;
+	}
+	
+	a{
+		color: #1890ff;
+	}
+	
+	h1, h2, h3 {
+		margin-top: 45px;
+	}
+	
+	h1 {
+		text-align: center;
+	}
+	
+	blockquote {
+		border-left: 4px solid #eee;
+		padding-left: 10px;
+		font-size: 90%;
+		color: #999;
+		margin-left: 0;
+	}
+	
+	code {
+		background-color: lightgoldenrodyellow;
+		padding: 5px;
+	}
+	
+	#logo a{
+		float:left;
+	}
+	
+	#logo img{
+		width: 100px;
+	}
+	
+	#page-header {
+		display: block;
+		height: 44px;
+		margin: auto;
+		margin-top: 20px;
+		max-width: 800px;
+		border-bottom: 1px solid #ccc;
+	}
+	
+	#menu {
+		float:right;
+	}	
+	
+	#menu a{
+		line-height:42px;
+		margin-left: 12px;
+		text-decoration: none;
+	}
+	
+	.post {
+		max-width: 800px;
+		margin: auto;
+	}
+	
+	.list ul li{
+		margin-bottom: 8px;
+	}
+	
+	.linkdate{
+		font-size: 85%;
+		color: gray;
+	}
+	
+	#page_footer {
+		max-width: 800px;
+		margin: auto;
+		margin-top: 60px;
+		margin-bottom: 40px;
+	}
+	
+	.created_by{
+		font-size: small;
+		display: block;
+		text-align: center;
+		color: #aaa;
+	}
+	
+	.created_by a{
+		color: #aaa
+	}
+	
+	#comments_section{
+		display: block;
+	}
+  </style>
+</head>
+
+<body>
+	<div id="page-header">
+	<div id="logo">
+		<a href="index.html">
+			<img src="images/yortuc_logo.png" />
+		</a>
+	</div>
+
+	<div id="menu">
+	<a href="tidbits.html">Tidbits</a>
+	<a href="projects.html">Projects</a>
+	<a href="index.html">Archive</a>
+	<a href="about.html">About</a>
+</div>
+</div>
+
+	<div class="post">
+		<h1>Tidbits</h1>
+<blockquote>
+<p><em>Tidbit</em>: a small piece of interesting information, or a small dish of pleasant-tasting food. (Cambridge dictionary)</p>
+</blockquote>
+<h3>Array in udf</h3>
+<p>How to apply an udf on a column which contains an array<string> type: use Seq[String]</p>
+<p>Dataframe looks like this:</p>
+<pre>
+    root
+     |-- id: long (nullable = false)
+     |-- items: array (nullable = true)
+     |    |-- element: string (containsNull = true)
+</pre>
+
+<p>udf:
+<pre>
+    val countItems = udf((history: Seq[String]) =&gt; history.size)
+    df.withColumn("items_count", countItems($"history"))  <br />
+</pre></p>
+<h3>AlmostEqual for scala testing</h3>
+<p>Before:
+<pre>
+    assert(point.getX === 1.0)</p>
+<div class="codehilite"><pre><span></span><span class="o">//</span><span class="w"> </span><span class="k">result</span><span class="err">:</span><span class="w"></span>
+<span class="o">//[</span><span class="n">info</span><span class="o">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">***</span><span class="w"> </span><span class="n">FAILED</span><span class="w"> </span><span class="o">***</span><span class="w"></span>
+<span class="o">//[</span><span class="n">info</span><span class="o">]</span><span class="w">   </span><span class="mf">0.9999999999999998</span><span class="w"> </span><span class="n">did</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="p">(</span><span class="n">Test</span><span class="p">.</span><span class="nl">scala</span><span class="p">:</span><span class="mi">47</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+
+
+</pre>
+
+<p>During:
+<pre>
+    // Import 
+    import org.scalactic.TolerantNumerics</p>
+<div class="codehilite"><pre><span></span><span class="o">//</span> <span class="k">In</span> <span class="n">test</span> <span class="k">class</span>
+<span class="n">val</span> <span class="n">epsilon</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">4</span><span class="n">f</span>
+<span class="k">implicit</span> <span class="n">val</span> <span class="n">doubleEq</span> <span class="o">=</span> <span class="n">TolerantNumerics</span><span class="p">.</span><span class="n">tolerantDoubleEquality</span><span class="p">(</span><span class="n">epsilon</span><span class="p">)</span>
+</pre></div>
+
+
+</pre>
+
+<p>After:
+All tests passed.</p>
+	</div>
+	
+	<div id="page_footer">
+	
+	<h3>Comments</h3>
+	<div id="comments_section">
+		<div id="disqus_thread"></div>
+			<script>
+			(function() { 
+			var d = document, s = d.createElement('script');
+			s.src = '//yortuc-com.disqus.com/embed.js';
+			s.setAttribute('data-timestamp', +new Date());
+			(d.head || d.body).appendChild(s);
+			})();
+			</script>
+			<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		</div>
+	</div>
+		
+	<span class="created_by">2020 (c) generated by simplest blog engine [<a href="https://github.com/yortuc/simbe" target="_blank">get it here</a>]</span>
+</div>
+</body>
+</html>
+
+

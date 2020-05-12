@@ -123,28 +123,23 @@
 </div>
 
 	<div class="post">
-		<h1>Logical Scenario Matching from Video [Draft]:</h1>
-<p>Give a short introduction about what a logical scenario is.</p>
+		<h1>Objects: Programmatic design app</h1>
+<p>After getting an iPad pro, as everyone, we started playing with amazing <code>Procreate</code> app. Personally, I do not have that much of drawing skills but I like to draw lines, cubes and geometric patterns on paper when I am bored. That made me think about a small drawing/design app which allows users to create such things with a programmable interface. </p>
+<h3>First draft</h3>
+<p>Then I started playing in my 15 minutes free time in a day. (Having one boy and a baby takes all your free time away). Here is the first ever demo.</p>
+<p><a class="jsbin-embed" href="https://jsbin.com/siyafut/embed?js,output">JS Bin on jsbin.com</a><script src="https://static.jsbin.com/js/embed.min.js?4.1.7"></script></p>
+<h3>How to use</h3>
+<p>Program will have 3 main components. </p>
+<p><strong>Object</strong>: Will serve a basis to creating patterns. Object can be a rectangle, circle, free drawing and so on. User will be able to change the look of object through styling properties.</p>
+<p><strong>Cloner</strong>: Can be applied to objects. This will clone the object in a specific way and create a pattern (group in fabricjs). After that, another(or the same cloner) can be applied to the end result.  </p>
+<p><strong>Modifier</strong>: Can be applied only groups, since, modifies the objects in group in some structured way. Can create a color gradient, can change some arbitrary propery of all the objects depending on some custom function (linear, exp, ...)</p>
+<p>There will be read-to-use cloners and modifiers and user can copy and edit the code. Or, crete new cloners or modifiers from scratch, with code and/or some UI. </p>
+<p>This is starting of a fun project which I do not commit anything.</p>
+<p>The next demo: </p>
 <ul>
-<li>YOLO can detect car/truck/...</li>
-<li>Lane lines can be detected with OpenCV (maybe YOLO also? other CNN?)</li>
-<li>Can we assign absolute lane_id for objects? for ego vehicle?
--- If so, we can label atomic states for moving objects and do the logical scenario matching</li>
-<li>Even this is not possible, still some info can be extracted from video. 
---- Lane changes?
---- How many objects?
---- Object type validation</li>
-</ul>
-<p>Optional:
-- Run YOLO (OpenCV or TF, or whatever) with Spark on cluster and process videos</p>
-<p>Actions:
-1. Install OpenCV on Linux vm
-2. Install/test darknet-yolo python bindings for single frames
-3. Process a session video with darknet-yolo
-4. Detect lane lines
-5. Combine objects and lane lines</p>
-<ul>
-<li>Run OpenCV with Scala</li>
+<li>Separate cloners (circular, pyramid) and modifiers (opacity modifier)</li>
+<li>Make cloner parameters (clone count) editable with a UI, some range sliders.</li>
+<li>Keep the position and size properties of the resulting group while changing cloner/modifier parameters.</li>
 </ul>
 	</div>
 	
