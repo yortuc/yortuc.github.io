@@ -94,6 +94,7 @@
 		display: block;
 		text-align: center;
 		color: #aaa;
+		margin-bottom: 40px;
 	}
 	
 	.created_by a{
@@ -168,6 +169,20 @@
 
 <p>After:
 All tests passed.</p>
+<h3>Pandas save as Decimal</h3>
+<p>Decimal has the most precision when it comes to floating points. But it's not a native type in pandas. This is how you cast values into decimal.</p>
+<pre>
+import decimal
+df['dx'] = df['dx'].astype(str).map(decimal.Decimal)
+df['dy'] = df['dy'].astype(str).map(decimal.Decimal)
+</pre>
+
+<h3>Change the author of the last commit</h3>
+<p><code>git commit --amend --author="username &lt;email@gmail.com&gt;"</code></p>
+<h3>Roll back to some previous commit</h3>
+<p>Here <code>n</code> is the commit number starting as 0 from top. So running this command with HEAD~0 should have no effect.</p>
+<p><code>git reset HEAD~n --hard</code> </p>
+<h3>Spark compiled or provided?</h3>
 	</div>
 	
 	<div id="page_footer">
