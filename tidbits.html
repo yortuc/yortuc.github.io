@@ -34,6 +34,11 @@
 		margin-top: 45px;
 	}
 	
+	h3 {
+		margin-bottom: 0;
+	}
+	p{ margin: 0; }
+	
 	h1 {
 		text-align: center;
 	}
@@ -195,6 +200,15 @@ df['dy'] = df['dy'].astype(str).map(decimal.Decimal)
 <h3>Spark compiled or provided?</h3>
 <p>It's provided. 
 Both sbt and Maven have assembly plugins. When creating assembly jars, list Spark and Hadoop as provided dependencies; these need not be bundled since they are provided by the cluster manager at runtime. Once you have an assembled jar you can call the bin/spark-submit script as shown here while passing your jar.</p>
+<h3>Write a single csv file with Spark</h3>
+<p><pre>
+    df
+      .coalesce(1)
+      .write.format("com.databricks.spark.csv")
+      .option("header", "true")
+      .save("single_csv_output.csv")
+</pre></p>
+<h3></h3>
 	</div>
 	
 	<div id="page_footer">

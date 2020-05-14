@@ -139,40 +139,78 @@
 </div>
 
 	<div class="post">
-		<h1>Roadmap for 2020</h1>
-<p>It's already May, 4 months from 2020 is gone, still we have 8 month left in front of us. </p>
-<h3>Professional Work</h3>
-<p>I am currently working in BMW Autonomous Driving Campus, on drive analytics. Drive analytics means driving statistics from real drive data. We need to match logical scenarios like <code>cut-in</code> in real driving data and extract concrete scenarios. </p>
-<p><strong>Domain knowledge</strong></p>
-<ul>
-<li>Read papers and books about safety of autonomous vehicles and take detailed notes which will be converted into blog posts for this blog :)
--- Test Specifications for Highly Automated Driving Functions: Highway Pilot (read+, notes+, post-)</li>
-</ul>
-<p><strong>Software engineering</strong></p>
-<ul>
-<li>Work regularly on some source code for an opensource project (Spark is the biggest candidate)</li>
-<li>Analyse the execution plans for the Spark Jobs at hand and try to optimize. (Cache, refactor, to speed up)</li>
-<li>Analyze memory and CPU requirements and best utilization of Yarn cluster.</li>
-</ul>
-<h3>Interest topics</h3>
-<p><strong>Books I want to read</strong></p>
-<p>This year I want to read more books. The books on my list so far:</p>
-<ul>
-<li>Creative Selection</li>
-<li>Algorithms Illuminated: Part 1,2,3</li>
-<li></li>
-</ul>
-<p><strong>Algorithm Studies</strong></p>
-<p>I did the half of the Leetcode's 30 days of code challenge. Finish this and document the solutions in details. </p>
-<h3>Side Projects</h3>
-<p>My biggest hobby is also programming. I've always loved working on even very irrelevant side projects. But, I aslo have a habit of starting many projects and finishing none of them. And remmember the motto: <code>Stop starting, start finishing</code>. For this year I want to keep the list small.
-I will write detailed descriptions of each in the near future.</p>
-<ul>
-<li>Logical scenario matching from video (OpenCV, Yolo and some magic) </li>
-<li>Music composer assistant (Ludwig, seq2seq, music21)</li>
-<li>Programmable drawing app for iPad (Fabric.js, knockout ...)</li>
-<li>OpenDrive/OpenScenario/OpenLabel visualizer/editor?</li>
-</ul>
+		<h1>Integration testing for Spark</h1>
+<p>I like unit tests, but, you can miss some functionality to test very easily especially if you are writing the test after the actual implementation. (Sorry TDD people but that kind of people also exist on earth)</p>
+<h3>Project configuration</h3>
+<p>First of all we need to configure the project settings in <code>build.sbt</code>, assuming you have a multi-project structure.</p>
+<pre>
+    lazy val myProject = project
+        .in(file("./my-project"))
+        .configs(IntegrationTest)  // here
+        .settings(
+            Defaults.itSettings,   // and here
+            name := "myProject",
+            settings,
+            libraryDependencies ++= 
+                commonDependencies ++ sparkDependencies
+        )
+</pre>
+
+<p>Since we are using the default settings, the folder for the integration tests will be <code>it</code>. Let's create that folder, and at the end you should have this kind of folder structure:</p>
+<pre>
+    myProject
+    ├── src
+    │   ├── it    <-- here it is
+    │   │   └── scala
+    │   │       └── MyIntegrationTest.scala
+    │   ├── main
+    │   └── test
+    └── target
+</pre>
+
+<h3>Write the test</h3>
+<p>Let's write one simple integration test. </p>
+<pre>
+    import org.scalatest.flatspec.AnyFlatSpec
+    import com.yortuc.myProject
+
+    class MyIntegrationTest extends AnyFlatSpec {
+
+        "myProject" should "Read the data from Parquet and save the output correctly" in {
+
+            // create a spark session for testing, local mode.
+            val spark: sparkSession = createTestSparkSession
+
+            // run the app as it is
+            // in this example with two cli parameters for input and output path
+            val inputFilePath = "./input-data.parquet"
+            val outputPath = "./output.parquet"
+            val expectedOutputPath = "./expected-output.patquet"
+
+            MyProject.main(Array(inputFilePath, outputPath))
+
+            // read the output of the application
+            val output = spark.read.parque(outputPath)
+
+            // read the expected results
+            val expected = spark.read.parque(expectedOutputPath)
+
+            // compare them.
+            // they should be ordered in the same way to be able to compare!
+            val comparison = output.except(expected)
+
+            // there should be no different rows
+            assert(comparison.count() == 0)
+        }
+    }
+</pre>
+
+<p>And finally we can run the integration test via <code>sbt</code>.</p>
+<pre>
+    $ sbt it:test
+</pre>
+
+<p>I hope all your tests pass. Happy hacking.</p>
 	</div>
 	
 	<div id="page_footer">
