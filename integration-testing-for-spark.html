@@ -169,12 +169,9 @@
     import org.scalatest.flatspec.AnyFlatSpec
     import com.yortuc.myProject
 
-    class MyIntegrationTest extends AnyFlatSpec {
+    class MyIntegrationTest extends AnyFlatSpec with SparkSessionTestWrapper {
 
         "myProject" should "Read the data from Parquet and save the output correctly" in {
-
-            // create a spark session for testing, local mode.
-            val spark: sparkSession = createTestSparkSession
 
             // run the app as it is
             // in this example with two cli parameters for input and output path
@@ -191,12 +188,27 @@
             val expected = spark.read.parque(expectedOutputPath)
 
             // compare them.
-            // they should be ordered in the same way to be able to compare!
+            // you can use a library such as spark-fast-tests to compare two dataframes or use this naive approach.
+            // But, dataframes should be ordered in the same way. 
             val comparison = output.except(expected)
 
             // there should be no different rows
             assert(comparison.count() == 0)
         }
+    }
+</pre>
+
+<p>It's very common and hady to create a trait to have a central method to create Spark session inside a test. I will call it something like <code>SparkSessionTestWrapper</code>. Also we can improve this method to read the spark settings from a config file. And then you can choose how are you going to run your tests with spark.</p>
+<pre>
+    import org.apache.spark.sql.SparkSession
+
+    trait SparkSessionTestWrapper {
+      lazy val spark: SparkSession =
+        SparkSession
+          .builder()
+          .master("local")
+          .appName("spark test example")
+          .getOrCreate()
     }
 </pre>
 
