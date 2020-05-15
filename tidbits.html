@@ -161,24 +161,20 @@
 <p>Before:
 <pre>
     assert(point.getX === 1.0)</p>
-<div class="codehilite"><pre><span></span><span class="o">//</span><span class="w"> </span><span class="k">result</span><span class="err">:</span><span class="w"></span>
-<span class="o">//[</span><span class="n">info</span><span class="o">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">***</span><span class="w"> </span><span class="n">FAILED</span><span class="w"> </span><span class="o">***</span><span class="w"></span>
-<span class="o">//[</span><span class="n">info</span><span class="o">]</span><span class="w">   </span><span class="mf">0.9999999999999998</span><span class="w"> </span><span class="n">did</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="p">(</span><span class="n">Test</span><span class="p">.</span><span class="nl">scala</span><span class="p">:</span><span class="mi">47</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-
-
+<pre><code>// result:
+//[info] - test *** FAILED ***
+//[info]   0.9999999999999998 did not equal 1.0 (Test.scala:47)
+</code></pre>
 </pre>
 
 <p>During:
 <pre>
     // Import 
     import org.scalactic.TolerantNumerics</p>
-<div class="codehilite"><pre><span></span><span class="o">//</span> <span class="k">In</span> <span class="n">test</span> <span class="k">class</span>
-<span class="n">val</span> <span class="n">epsilon</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">4</span><span class="n">f</span>
-<span class="k">implicit</span> <span class="n">val</span> <span class="n">doubleEq</span> <span class="o">=</span> <span class="n">TolerantNumerics</span><span class="p">.</span><span class="n">tolerantDoubleEquality</span><span class="p">(</span><span class="n">epsilon</span><span class="p">)</span>
-</pre></div>
-
-
+<pre><code>// In test class
+val epsilon = 1e-4f
+implicit val doubleEq = TolerantNumerics.tolerantDoubleEquality(epsilon)
+</code></pre>
 </pre>
 
 <p>After:
@@ -207,7 +203,10 @@ Both sbt and Maven have assembly plugins. When creating assembly jars, list Spar
       .option("header", "true")
       .save("single_csv_output.csv")
 </pre></p>
-<h3></h3>
+<h3>Should I use df.sparkSession?</h3>
+<ul>
+<li>It's not possible to share a DataFrame between different sparkSessions</li>
+</ul>
 	</div>
 	
 	<div id="page_footer">
