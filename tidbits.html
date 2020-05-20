@@ -26,17 +26,15 @@
 		margin:0;
 	}
 	
-	a{
-		color: #1890ff;
-	}
+	a { color: #1890ff; }
 	
-	h1, h2, h3 {
-		margin-top: 45px;
-	}
+	h1, h2, h3 { margin-top: 45px; }
 	
-	h1 {
-		text-align: center;
-	}
+	h3, h4 { margin-bottom: 0 }
+	
+	h1 { text-align: center; }
+	
+	hr { width: 30%; margin-top: 45px; }
 	
 	blockquote {
 		border-left: 4px solid #eee;
@@ -51,13 +49,9 @@
 		padding: 5px;
 	}
 	
-	#logo a{
-		float:left;
-	}
+	#logo a{ float:left; }
 	
-	#logo img{
-		width: 100px;
-	}
+	#logo img{ width: 100px; }
 	
 	#page-header {
 		display: block;
@@ -68,9 +62,7 @@
 		border-bottom: 1px solid #ccc;
 	}
 	
-	#menu {
-		float:right;
-	}	
+	#menu { float:right; }	
 	
 	#menu a{
 		line-height:42px;
@@ -81,6 +73,10 @@
 	.post {
 		max-width: 800px;
 		margin: auto;
+	}
+	
+	.post p{
+		margin-top: 0;
 	}
 	
 	.post img {
@@ -117,6 +113,20 @@
 	
 	#comments_section{
 		display: block;
+	}
+	
+	.side-box{
+		width: 230px;
+		background-color: black;
+		color: white;
+		padding: 10px;
+		white-space: break-spaces;
+	}
+	
+	.side-box.left {
+		margin-right: 50px;
+		margin-left: 0;
+		float: left;
 	}
   </style>
 </head>
@@ -205,8 +215,11 @@ Both sbt and Maven have assembly plugins. When creating assembly jars, list Spar
 </pre></p>
 <h3>Should I use df.sparkSession?</h3>
 <ul>
-<li>It's not possible to share a DataFrame between different sparkSessions</li>
+<li>It's not possible to share a DataFrame between different sparkSessions. So it is safe to access sparkSession via Dataframe.</li>
 </ul>
+<h3>Using traits as interfaces?</h3>
+<p>As <a href="https://docs.scala-lang.org/overviews/scala-book/traits-interfaces.html">scala-lang docs</a> says, this is a legit approach.</p>
+<h3></h3>
 	</div>
 	
 	<div id="page_footer">
