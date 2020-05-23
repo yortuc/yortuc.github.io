@@ -152,18 +152,14 @@
 <p><img alt="pegaus project" src="images/pegasus_project.png" /></p>
 <p>Pegasus is a geovernment sponsored project aiming to provide new methods for the verification and validation of highly automated driving functions (SAE Level 3+). In other words, It's an attempt to answer the question <em>"How safe is a self driving car?"</em>. In this article, I will summarise important points in the original <a href="https://www.pegasusprojekt.de/files/tmpl/Pegasus-Abschlussveranstaltung/PEGASUS-Gesamtmethode.pdf">Pegasus paper</a> first section.</p>
 <h3>1. Abstract</h3>
-<p>In past years there companies focused on automated driving functions since there is a public interest. But, the development was more focused on functional, not on neither test nor validation and verification. </p>
+<p>In past years automotive companies focused on automated driving functions since there is a public interest. But, the development was more focused on functional, not on neither test nor validation and verification. </p>
 <p>And for testing of automated driving functions, <em>distance based testing</em> is currently used.</p>
-<p>The required tests distance for an automated driving function with the <a href="what-is-odd.html">ODD</a> highway is approximately <strong>6.2 Billion kilometers</strong> to show that the automated driving function is twice as good as a human driver. (Wachenfeld &amp; Winner, 2015)</p>
+<p>The required tests distance for an automated driving function within the <a href="what-is-odd.html">highway pilot odd</a> is approximately <strong>6.2 Billion kilometers</strong> to show that the automated driving function is twice as good as a human driver. (Wachenfeld &amp; Winner, 2015)</p>
 <p>This distance is obviously not realistic to drive and test the vehicle. </p>
-<p>One another option is <em>scenario based testing</em>. This gives the opportuinity to do the testing in a more structured way instead of distance based testing with random test cases. But then two questions arise:</p>
-<ul>
-<li><em>What performance is expected out of an automated driving system?</em></li>
-<li><em>How can we verify that it achieves the desired performance constantly?</em></li>
-</ul>
-<h4>What is the human driving performance within highway-plot ODD?</h4>
+<p>One another option is <em>scenario based testing</em>. This gives the opportuinity to do the testing in a more structured way instead of distance based testing with random test cases. </p>
+<h4>What is the human driving performance within highway-pilot ODD?</h4>
 <p>To answer this question, first, the accident database <a href="https://www.gidas.org/">GIDAS</a> is analysed and picked the accidents lie in the ODD. Then simulator studies were performed to derive a indicator model for human driver for selected scenarios. </p>
-<h4>Waht is the AD-function capabilities in highway-plot ODD?</h4>
+<h4>How to test AD-functions within the highway-pilot ODD?</h4>
 <p>Execution and evaluation of scenarios were done in simulation, on test track or in real traffic. This work requires these tasks to be completed:</p>
 <ul>
 <li>Systematic scenario generation process</li>
@@ -181,16 +177,16 @@
 <li>Digital information (map)</li>
 </ol>
 <p>Restricting this large parameter space with the ODD provides a full test space of the system. 
-It's hard to work with this large parameter space. To overcome this issue, Pegasus method defines a <em>logical scenario</em> that some parameters are fixed and some parameters are variable. One example is fixind the layer 4, with a 'cut-in' scenario. In the cut-in scenario, the constellations of the moving objects and the ego vehicle is fixed. And the rest of the parameters can be varied. </p>
+But it is still a very large parameter space to cover even after filtering with ODD. To overcome this issue, Pegasus method defines a <em>logical scenario</em> that some parameters are fixed and some parameters are variable. One example is fixind the layer 4, with a 'cut-in' scenario. In the cut-in scenario, the constellations of the moving objects and the ego vehicle is fixed. And the rest of the parameters can be varied. </p>
 <h4>How to test a logical scenario?</h4>
-<p>The overall goal is to identify collision relevant, concrete parameter areas in the parameter space of the logical scenario under test. </p>
-<p>The parameters that contribute most to the testing goal most is identified at sensitivity analysis phase. Based on this identification, the number of relevant parameters are reduced dramatically. Empirical studies showed that the numbers of most important parameters are in the range of 10 and 20. This reduces the parameter space which is needed to be covered. Pegasus database provides real world data to limit parameter ranges and reduce the paramter space such as:</p>
+<p>The overall goal is to identify collision relevant concrete parameter areas in the logical scenario's whole parameter space. </p>
+<p>The parameters that contribute to the testing goal most is identified at sensitivity analysis phase. Based on this identification, the number of relevant parameters are reduced dramatically. Empirical studies showed that the numbers of most important parameters are in the range of 10 and 20. This reduces the parameter space which is needed to be covered. Pegasus database provides real world data to limit parameter ranges and reduce the paramter space such as:</p>
 <ul>
 <li>concrete parameter sets for representative accidents</li>
 <li>observed critial constellations for the logical scenario</li>
-<li>distributions and correlations of parameters of the logical scenario</li>
+<li>distributions and correlations of parameters in real life</li>
 </ul>
-<p>Based on the stochastic variation within the parameter space, concrete parameters sets can be created automatically. Then each concrete parameter set corresponds to a concrete scenario and vice versa. For each concrete scenario, a black box simulation run is performed with a fail or pass result. The main goal is to find concrete parameter sets with failed (ego crashed) results. After that, critical cases get tested in real cars.</p>
+<p>Based on the stochastic variation within the parameter space, concrete parameter sets can be created automatically. Then, each concrete parameter set corresponds to a concrete scenario and vice versa. A black-box simulation run is performed with a fail or pass result for each concrete parameter set. The main goal is to find concrete parameter sets with failed (ego crashed) results. After that, critical cases get tested in real cars.</p>
 <p>In summary, once a logical scenario is defined, free parameters are varied by a sampling schema and concrete scenarios are created. By running each concrete scenario in simulator, critical parameter set areas are identified. Some critical test cases are tested on proving grounds. Because simulation has limitations especially in sensor models and extreme driving dynamics. It is not possible to test edge cases in real traffic, they have to be performed on proving grounds. In contrast, in real traffic, the behavior of the driving function is tested. The main goal is to catch "suprises" like new parameters, new scenarios. </p>
 <hr/>
 
