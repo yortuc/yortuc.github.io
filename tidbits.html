@@ -225,7 +225,17 @@ Both sbt and Maven have assembly plugins. When creating assembly jars, list Spar
 </ul>
 <h3>Using traits as interfaces?</h3>
 <p>As <a href="https://docs.scala-lang.org/overviews/scala-book/traits-interfaces.html">scala-lang docs</a> says, this is a legit approach.</p>
-<h3></h3>
+<h3>Download images as renamed listed in csv</h3>
+<p>Let's say we have csv file which contains list of links and file names. What is the easiest way to download these images and save them as file names given in csv other column? Node.js ? Python script? No, the shortest solution is using unix tools and pipe operator. </p>
+<p>Assumint we have image links in the first col and file names in the second col, we can solve the problem like this:</p>
+<p><code>cat source.csv | awk -F"," '{print "-O " $2 " "  $1}' | xargs wget</code></p>
+<p>Let's break this apart and see how it works. </p>
+<ol>
+<li><code>cat source.csv</code>: reads the csv file line by line</li>
+<li><code>awk -F"," '{print "-O " $2 " "  $1}'</code>: first we need to make awk understand the colmunar format is csv, so the divider is comma. Do this by providing <code>-F","</code>. And then, we create the required arguments for wget. To be able to download and save an image renamed, we do <code>wget -O foo.png some-site.com/cat.png</code>. If you run the command until this point, it will print <code>-O foo.png some-site.com/cat.png</code> exactly what we need to pass to wget. </li>
+<li><code>xargs wget</code>: using xargs, now we pass the arguments we built in the previous step to wget. </li>
+</ol>
+<p>Bash is magic.</p>
 	</div>
 	
 	<div id="page_footer">
