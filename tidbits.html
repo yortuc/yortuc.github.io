@@ -235,7 +235,15 @@ Both sbt and Maven have assembly plugins. When creating assembly jars, list Spar
 <li><code>awk -F"," '{print "-O " $2 " "  $1}'</code>: first we need to make awk understand the colmunar format is csv, so the divider is comma. Do this by providing <code>-F","</code>. And then, we create the required arguments for wget. To be able to download and save an image renamed, we do <code>wget -O foo.png some-site.com/cat.png</code>. If you run the command until this point, it will print <code>-O foo.png some-site.com/cat.png</code> exactly what we need to pass to wget. </li>
 <li><code>xargs wget</code>: using xargs, now we pass the arguments we built in the previous step to wget. </li>
 </ol>
-<p>Bash is magic.</p>
+<p>Unix pipes are magic.</p>
+<h3>Git undo options</h3>
+<ul>
+<li>Discard all unstaged local changes: <code>git reset --hard</code></li>
+<li>Discard one unstaged file: <code>git checkout -- &lt;filename&gt;</code> </li>
+<li>Unstage all changes (retains changes): <code>git reset</code> </li>
+<li>Unstage all changes discard everythink permanently: <code>git reset --hard</code></li>
+<li>Unstage one file: <code>git reset HEAD &lt;filename&gt;</code> </li>
+</ul>
 	</div>
 	
 	<div id="page_footer">
