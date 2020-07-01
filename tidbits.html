@@ -244,6 +244,51 @@ Both sbt and Maven have assembly plugins. When creating assembly jars, list Spar
 <li>Unstage all changes discard everythink permanently: <code>git reset --hard</code></li>
 <li>Unstage one file: <code>git reset HEAD &lt;filename&gt;</code> </li>
 </ul>
+<h3>Combine columns into array in a Spark DataFrame</h3>
+<p>We can do it with <code>array</code> function.</p>
+<pre>
+    import org.apache.spark.sql.functions._
+    val result = inputSmall.withColumn("combined", array($"transformedCol1", $"transformedCol2"))
+    result.show()
+
+    +-------+---------------+-------+---------------+-----------+
+    |column1|transformedCol1|column2|transformedCol2|   combined|
+    +-------+---------------+-------+---------------+-----------+
+    |      A|            0.3|      B|           0.25|[0.3, 0.25]|
+    |      A|            0.3|      g|            0.4| [0.3, 0.4]|
+    |      d|            0.0|      f|            0.1| [0.0, 0.1]|
+    |      d|            0.0|      d|            0.7| [0.0, 0.7]|
+    |      A|            0.3|      d|            0.7| [0.3, 0.7]|
+    |      d|            0.0|      g|            0.4| [0.0, 0.4]|
+    |      c|            0.2|      B|           0.25|[0.2, 0.25]|
+    +-------+---------------+-------+---------------+-----------+
+</pre>
+
+<p>We can also create columns list dynamically, querying all columns. For instance, I want to combine columns starting with <code>m_</code> only:</p>
+<pre>
+    val filteredCols: Array[Column] = df.columns.filter(_.startsWith("m_")).map(col(_))
+    val result = df.withColumn("combined", array(filteredCols:_*))
+</pre>
+
+<h3>Create multiple columns dynamically</h3>
+<p>I want to create multiple columns on a dataframe depending on an array maybe:</p>
+<pre>
+    val result = frames.select($"*" +: timeWindows.map(t => 
+      when($"timestamp" >= c.getAs[Long]("start") && $"timestamp" <= c.getAs[Long]("end"), lit(c.getAs[String]("windowId")))
+        .otherwise(lit(0)).alias(s"m_${c.getAs[String]("windowId")}")
+    ): _*)
+</pre>
+
+<h3>Create a UUID column based on a unique key</h3>
+<p>Let's say we have a unique key field in a Spark dataframe, but this does not look as good as UUID. We can create a column with UUIDs based on this unique key.</p>
+<pre>
+    import java.util.UUID
+
+    val uuidFromKey = udf((key: String) => UUID.nameUUIDFromBytes(key.getBytes()).toString())
+
+    val framesWithUUIDs = frames
+        .withColumn("unique_uuid", uuidFromKey($"unique_key"))
+</pre>
 	</div>
 	
 	<div id="page_footer">
