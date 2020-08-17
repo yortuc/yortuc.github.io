@@ -131,19 +131,16 @@ function highlightCanvas(mappings, curLine){
   context.clearRect(0, 0, 800, 600);
   editor.draw();
 
-  const curMaps = mappings.filter(m => m.lineNumber == curLine)
-  
+  for(let i=0; i<mappings.length; i++){
+    if(m.lineNumber == curLine){
+      context.save()
+      context.strokeStyle = "red";
+      context.lineWidth = 3;
+
+      context.rect(m.x, m.y, m.w, m.h)
+      context.stroke()
+      context.restore()  
+    }
+  }
   console.log(curMaps.length)
-
-  curMaps.forEach(m => {
-    console.log(m);
-    context.save()
-    context.strokeStyle = "red";
-    context.lineWidth = 3;
-
-    context.rect(m.x, m.y, m.w, m.h)
-    context.stroke()
-    context.restore()
-  });
-
 }
