@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scenario-based AI evaluation framework — yortuc</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="/" class="site-logo">yortuc</a>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/projects/" aria-current="page">Projects</a>
+        <a href="/writing/">Writing</a>
+        <a href="/talks.html">Talks</a>
+        <a href="/about.html">About</a>
+        <a href="/resume.html">Resume</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button type="button" class="theme-toggle" aria-label="Switch to dark mode">☾</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <a href="/projects/" class="back-link prose">← Projects</a>
+
+    <article class="prose">
+      <h1>Scenario-based AI evaluation framework</h1>
+      <p><strong>Designing deterministic simulation scenarios and regression-style tests to validate multi-step AI behavior over time.</strong></p>
+      <p><span class="meta">evaluation · agentic · reliability</span></p>
+
+      <h2>Problem</h2>
+      <p>Multi-step AI systems are hard to evaluate: non-determinism, many steps, and environment dependence make it difficult to get a stable signal. Teams needed repeatable tests that could run in CI and gate regressions without relying only on live traffic.</p>
+
+      <h2>Approach</h2>
+      <p>Scenario-based benchmarks where each scenario is a fixed setup—initial state, inputs, and clear success criteria. The system runs agents in a controlled (often simulated) environment and scores outcomes against golden answers and assertion rules. Results are comparable across runs, so model and prompt changes can be measured objectively.</p>
+
+      <h2>Key contributions</h2>
+      <ul>
+        <li>Scenario definition format and runner that executes agents and evaluates against configurable checks.</li>
+        <li>CI/CD integration so evals run on every change and merges can be gated on regression.</li>
+        <li>Design patterns for scenarios that reflect real failure modes and product success criteria.</li>
+      </ul>
+
+      <h2>What made it interesting</h2>
+      <ul>
+        <li>Trade-off between scenario fidelity (how close to production) and stability (determinism, speed).</li>
+        <li>Defining “correct” for multi-step, sometimes stochastic behavior without over-constraining.</li>
+      </ul>
+
+      <h2>What I'd improve next</h2>
+      <ul>
+        <li>Expand scenario coverage for edge cases and adversarial inputs.</li>
+        <li>Lightweight simulation mode that mocks external systems for faster local iteration.</li>
+      </ul>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Evren Yortuc — yortuc.com</p>
+  </footer>
+  <script src="/js/site.js"></script>
+</body>
+</html>

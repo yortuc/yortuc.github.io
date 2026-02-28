@@ -1,0 +1,37 @@
+baseURL = 'https://yortuc.github.io/'
+languageCode = 'en-us'
+title = 'yortuc'
+theme = 'PaperMod'
+disqusShortname = 'yortuc-blog'
+
+[params]
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  author = "Evren"
+  comments = true
+  defaultTheme = "light"
+  ShareButtons = ["x", "linkedin"]
+
+[[params.socialIcons]]
+  name = "twitter"
+  url = "https://twitter.com/YOUR_HANDLE"
+
+[[params.socialIcons]]
+  name = "github"
+  url = "https://github.com/yortuc"
+
+[[params.socialIcons]]
+  name = "linkedin"
+  url = "https://linkedin.com/in/YOUR_PROFILE"
+
+[params.assets]
+  [[params.assets.customCSS]]
+    href = "https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&display=swap"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

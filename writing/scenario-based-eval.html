@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scenario-based evaluation for agentic systems — yortuc</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="/" class="site-logo">yortuc</a>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/projects/">Projects</a>
+        <a href="/writing/" aria-current="page">Writing</a>
+        <a href="/talks.html">Talks</a>
+        <a href="/about.html">About</a>
+        <a href="/resume.html">Resume</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button type="button" class="theme-toggle" aria-label="Switch to dark mode">☾</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <a href="/writing/" class="back-link prose">← Writing</a>
+
+    <article class="prose">
+      <h1>Scenario-based evaluation for agentic systems: why deterministic tests still matter</h1>
+      <p class="date" style="margin-bottom: 1.5rem;">2025-02-06</p>
+
+      <p>Agentic systems are messy: non-deterministic models, stateful tools, external APIs, and long chains of reasoning. It’s tempting to think that “real” evaluation only happens in production or in large-scale human evals. But if you want to iterate quickly and catch regressions before they ship, you need a stable signal. That’s where scenario-based evaluation comes in.</p>
+
+      <h2>What is scenario-based evaluation?</h2>
+      <p>A scenario is a fixed setup: initial state, user input (or system trigger), and a clear definition of success. You run the agent in a controlled environment—often a simulator or a mocked version of your stack—and check outcomes against golden answers or assertion rules. Because the scenario is fixed, repeated runs are comparable. Change the model, the prompt, or the orchestration; run the same scenarios again. If scores drop, you’ve got a regression.</p>
+
+      <h2>Why deterministic tests still matter</h2>
+      <p>Deterministic doesn’t mean the model output is identical every time. It means the <em>test</em> is deterministic: same scenario, same evaluation criteria. The agent can still be stochastic. You’re not testing for byte-for-byte equality; you’re testing for “did it do the right thing?”—correct diagnosis, correct remediation, no harmful actions, etc. That’s something you can assert in CI.</p>
+      <p>Without scenario-based tests, you’re either flying blind until production or relying on slow, expensive human evals for every change. With them, you get fast feedback: run the suite on every PR, gate merges on regression, and reserve human evals for deeper validation and new scenario design.</p>
+
+      <h2>Designing good scenarios</h2>
+      <p>Scenarios should reflect real failure modes and success criteria. Include edge cases, adversarial inputs, and multi-step flows. Keep the environment as close to production as you can without flakiness—mock external services, use recorded responses, or run in a sandbox. And version your scenarios like code: when behavior or product requirements change, update the scenarios and the golden answers.</p>
+
+      <p>In short: deterministic scenario-based evaluation gives you a stable, automatable signal for agentic systems. Use it in CI, iterate on scenarios as you learn, and keep shipping with confidence.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Evren Yortuc — yortuc.com</p>
+  </footer>
+  <script src="/js/site.js"></script>
+</body>
+</html>

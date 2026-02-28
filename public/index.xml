@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>yortuc</title>
+    <link>https://yortuc.github.io/</link>
+    <description>Recent content on yortuc</description>
+    <generator>Hugo -- 0.157.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 27 Feb 2026 18:01:22 -0800</lastBuildDate>
+    <atom:link href="https://yortuc.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Simulation for Agentic Evaluation</title>
+      <link>https://yortuc.github.io/posts/simulation-for-agentic-evaluation/</link>
+      <pubDate>Fri, 27 Feb 2026 18:01:22 -0800</pubDate>
+      <guid>https://yortuc.github.io/posts/simulation-for-agentic-evaluation/</guid>
+      <description>&lt;p&gt;Evaluating AI agents presents fundamentally different challenges compared to traditional software testing. Traditional software follows deterministic paths—given the same input, you get the same output. You can write unit tests, integration tests, and measure code coverage with confidence. But agents are non-deterministic by nature. They make decisions based on LLM outputs that vary between runs, they interact with external systems in unpredictable ways, and they can take multiple valid paths to solve the same problem. You can&amp;rsquo;t simply assert that function X returns value Y. Instead, you need to evaluate whether the agent achieved the intended outcome, regardless of how it got there. This shift from testing execution paths to evaluating goal achievement requires entirely new evaluation frameworks—and that&amp;rsquo;s where simulation comes in.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

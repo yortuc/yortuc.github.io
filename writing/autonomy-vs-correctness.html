@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autonomy vs correctness: progressive autonomy and guardrails — yortuc</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="/" class="site-logo">yortuc</a>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/projects/">Projects</a>
+        <a href="/writing/" aria-current="page">Writing</a>
+        <a href="/talks.html">Talks</a>
+        <a href="/about.html">About</a>
+        <a href="/resume.html">Resume</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button type="button" class="theme-toggle" aria-label="Switch to dark mode">☾</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <a href="/writing/" class="back-link prose">← Writing</a>
+
+    <article class="prose">
+      <h1>Autonomy vs correctness: progressive autonomy and guardrails</h1>
+      <p class="date" style="margin-bottom: 1.5rem;">2025-02-06</p>
+
+      <p>More autonomy is only good if the system stays correct. In practice, that means two things: scaling autonomy gradually (progressive autonomy) and enforcing guardrails so agents don’t do the wrong thing at the wrong time.</p>
+
+      <h2>Progressive autonomy</h2>
+      <p>Start with a narrow, well-defined scope where success is easy to measure and failure modes are understood. Ship that, instrument it, and learn. Then expand: more tools, more domains, more “decide on your own” and less “ask the human.” Each step should be gated on evidence that the current scope is under control—e.g. scenario-based evals, policy violation rates, and rollback readiness. Jumping straight to “full autonomy” is a recipe for incidents and rollbacks.</p>
+
+      <h2>Guardrails as a product requirement</h2>
+      <p>Guardrails aren’t an afterthought. They’re the mechanism that keeps autonomy bounded. Policy engines, tool allowlists, parameter checks, and human-in-the-loop for high-risk actions all count. The goal is to make it impossible (or at least very hard) for the agent to take harmful or out-of-scope actions, while still allowing it to be useful. That requires designing policies up front and treating them as versioned, testable configuration—not ad-hoc prompts or one-off checks.</p>
+
+      <h2>Correctness over demos</h2>
+      <p>It’s easy to demo an agent that does something impressive once. It’s harder to ship one that does the right thing consistently and fails safely when it doesn’t. Optimize for correctness and safe failure; treat autonomy as a dial you turn up as you gain confidence, not a default max setting.</p>
+
+      <p>In short: autonomy and correctness go together. Progressive autonomy plus guardrails lets you scale scope safely and keep the system predictable in production.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Evren Yortuc — yortuc.com</p>
+  </footer>
+  <script src="/js/site.js"></script>
+</body>
+</html>

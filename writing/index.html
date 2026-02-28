@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Writing — yortuc</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="/" class="site-logo">yortuc</a>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/projects/">Projects</a>
+        <a href="/writing/" aria-current="page">Writing</a>
+        <a href="/talks.html">Talks</a>
+        <a href="/about.html">About</a>
+        <a href="/resume.html">Resume</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button type="button" class="theme-toggle" aria-label="Switch to dark mode">☾</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <a href="/" class="back-link prose">← Home</a>
+
+    <article class="prose">
+      <h1>Writing</h1>
+      <p>Notes on agent evaluation, guardrails, observability, and product-minded AI engineering.</p>
+
+      <div class="post-preview">
+        <h2><a href="/writing/scenario-based-eval.html">Scenario-based evaluation for agentic systems: why deterministic tests still matter</a></h2>
+        <p class="date">2025-02-06</p>
+        <p>When everything is non-deterministic—models, tools, environments—you still need a stable signal. Scenario-based benchmarks give you that.</p>
+      </div>
+
+      <div class="post-preview">
+        <h2><a href="/writing/autonomy-vs-correctness.html">Autonomy vs correctness: progressive autonomy and guardrails</a></h2>
+        <p class="date">2025-02-06</p>
+        <p>Shipping safe autonomy means scaling scope gradually and enforcing guardrails so agents don’t do the wrong thing at the wrong time.</p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Evren Yortuc — yortuc.com</p>
+  </footer>
+  <script src="/js/site.js"></script>
+</body>
+</html>

@@ -1,64 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>yortuc</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/451/fabric.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>yortuc — Agentic AI &amp; Evaluation Infrastructure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/site.css">
 </head>
 <body>
-    <canvas id="canvas" width="400" height="400"></canvas>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="/" class="site-logo">yortuc</a>
+      <nav class="site-nav">
+        <a href="/" aria-current="page">Home</a>
+        <a href="/projects/">Projects</a>
+        <a href="/writing/">Writing</a>
+        <a href="/talks.html">Talks</a>
+        <a href="/about.html">About</a>
+        <a href="/resume.html">Resume</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button type="button" class="theme-toggle" aria-label="Switch to dark mode">☾</button>
+    </div>
+  </header>
 
-    <div id="configOptions"></div>
+  <main class="page">
+    <section class="hero">
+      <h1>Building reliable agentic AI systems with strong evaluation foundations.</h1>
+      <p class="lead">I design and build AI systems that operate reliably in real-world environments, with a focus on evaluation, observability, and controlled autonomy.</p>
+      <div class="hero-cta">
+        <a href="/projects/" class="btn btn-primary">View Projects</a>
+        <a href="/resume.html" class="btn btn-secondary">Download Resume</a>
+        <a href="/contact.html" class="btn btn-secondary">Contact</a>
+      </div>
+    </section>
 
-    <script>
-        var canvas = new fabric.Canvas('canvas')
-        canvas.selection = false;
+    <h2 class="section-title">What I work on</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Agentic systems</h3>
+        <p>Designing multi-step AI workflows that combine reasoning, tools, and structured decision-making.</p>
+      </div>
+      <div class="card">
+        <h3>AI evaluation &amp; reliability</h3>
+        <p>Building evaluation frameworks that turn complex AI behavior into measurable, testable signals.</p>
+      </div>
+      <div class="card">
+        <h3>Data &amp; platform engineering</h3>
+        <p>Creating scalable infrastructure, pipelines, and systems that support reliable AI in production.</p>
+      </div>
+    </div>
 
-        const bg = new fabric.Rect({
-            top: 0,
-            left:0,
-            width: 500,
-            height: 600,
-            fill: "#fff",
-            evented: false
-        })
-        canvas.add(bg)
+    <h2 class="section-title">Featured work</h2>
+    <div class="tiles">
+      <a href="/projects/simit-bench.html" class="tile">
+        <h3>Agent evaluation framework</h3>
+        <p>Scenario-based testing and regression pipelines for AI behavior validation.</p>
+        <span class="meta">evaluation · agentic · reliability</span>
+      </a>
+      <a href="/projects/multi-agent.html" class="tile">
+        <h3>Autonomous workflow systems</h3>
+        <p>Designing structured agent workflows with guardrails and observability.</p>
+        <span class="meta">agentic · reliability</span>
+      </a>
+      <a href="/projects/shield.html" class="tile">
+        <h3>AI observability &amp; testing</h3>
+        <p>Turning ambiguous model behavior into traceable, debuggable signals.</p>
+        <span class="meta">observability · evaluation · agentic</span>
+      </a>
+    </div>
 
-        const logo = new fabric.Text('yortuc.com', {
-            fontFamily: "Verdana",
-            left: 50,
-            top: 50,
-            evented: false,
-            fontSize: 20,
-            fill: "#fff",
-            backgroundColor: "#000"
-        })
-        canvas.add(logo)
+    <div class="contact-bar footer-cta">
+      <p>Interested in collaborating or discussing AI systems and evaluation?</p>
+      <a href="/contact.html">→ Contact</a>
+    </div>
+  </main>
 
-        const salute = new fabric.Text(
-            "{ work in progress }", {
-            fontFamily: "Verdana",
-            left: 130,
-            top: 120,
-            evented: false,
-            fontSize: 16,
-            originX: 'center',
-            originY: 'center'
-        })
-        function anim(angle){
-            salute.animate('angle', angle, {
-                duration: 1000,
-                onChange: canvas.renderAll.bind(canvas),
-                easing: fabric.util.ease.easeInBack,
-                onComplete: function() {
-                    anim(-angle)
-                }
-            });
-        }
-        anim(10)
-
-        canvas.add(salute)
-    </script>
+  <footer class="site-footer">
+    <p>© Evren Yortuc — yortuc.com</p>
+  </footer>
+  <script src="/js/site.js"></script>
 </body>
 </html>
-

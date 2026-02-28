@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI behavior observability toolkit — yortuc</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="/" class="site-logo">yortuc</a>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/projects/" aria-current="page">Projects</a>
+        <a href="/writing/">Writing</a>
+        <a href="/talks.html">Talks</a>
+        <a href="/about.html">About</a>
+        <a href="/resume.html">Resume</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button type="button" class="theme-toggle" aria-label="Switch to dark mode">☾</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <a href="/projects/" class="back-link prose">← Projects</a>
+
+    <article class="prose">
+      <h1>AI behavior observability toolkit</h1>
+      <p><strong>Creating logging and tracing patterns that make agent decisions explainable and debuggable.</strong></p>
+      <p><span class="meta">observability · evaluation · agentic</span></p>
+
+      <h2>Problem</h2>
+      <p>Production agentic systems need to stay within guardrails while remaining useful. Without a clear view of what the agent did and why, debugging failures and tuning behavior is guesswork. We needed patterns for tracing decisions, policy evaluations, and tool use so behavior could be inspected and improved.</p>
+
+      <h2>Approach</h2>
+      <p>A combination of structured logging, trace events for each decision step, and a policy layer that evaluates actions against configurable rules and logs every allow/block/escalate. The goal is to turn ambiguous model behavior into traceable, debuggable signals.</p>
+
+      <h2>Key contributions</h2>
+      <ul>
+        <li>Policy engine that evaluates agent actions and tool calls against declarative rules, with full logging of rationale.</li>
+        <li>Tool safety layer: allowlists, parameter validation, and approval flows for sensitive operations.</li>
+        <li>Observability patterns: traces, policy-hit events, and decision rationale for every guarded action.</li>
+      </ul>
+
+      <h2>What made it interesting</h2>
+      <ul>
+        <li>Designing logs and traces that are useful for both debugging and for tuning evaluation metrics.</li>
+        <li>Keeping the policy layer fast and testable so it doesn’t become a bottleneck.</li>
+      </ul>
+
+      <h2>What I'd improve next</h2>
+      <ul>
+        <li>Policy versioning and A/B testing for guardrail changes.</li>
+        <li>Structured “reasons” in logs to support training or fine-tuning on policy-aligned behavior.</li>
+      </ul>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Evren Yortuc — yortuc.com</p>
+  </footer>
+  <script src="/js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — yortuc</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="/" class="site-logo">yortuc</a>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/projects/" aria-current="page">Projects</a>
+        <a href="/writing/">Writing</a>
+        <a href="/talks.html">Talks</a>
+        <a href="/about.html">About</a>
+        <a href="/resume.html">Resume</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button type="button" class="theme-toggle" aria-label="Switch to dark mode">☾</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <a href="/" class="back-link prose">← Home</a>
+
+    <article class="prose">
+      <h1>Projects</h1>
+      <p>Problem, approach, key contributions, and what I'd improve next. Filter by focus.</p>
+
+      <div class="tags" role="group" aria-label="Filter by tag">
+        <button type="button" class="tag active" data-filter="all">All</button>
+        <button type="button" class="tag" data-filter="agentic">agentic</button>
+        <button type="button" class="tag" data-filter="evaluation">evaluation</button>
+        <button type="button" class="tag" data-filter="reliability">reliability</button>
+        <button type="button" class="tag" data-filter="observability">observability</button>
+        <button type="button" class="tag" data-filter="platform">platform</button>
+      </div>
+
+      <div class="tiles project-list">
+        <a href="/projects/simit-bench.html" class="tile" data-tags="agentic evaluation reliability">
+          <h3>Scenario-based AI evaluation framework</h3>
+          <p>Designing deterministic simulation scenarios and regression-style tests to validate multi-step AI behavior over time.</p>
+          <span class="meta">evaluation · agentic · reliability</span>
+        </a>
+        <a href="/projects/multi-agent.html" class="tile" data-tags="agentic reliability platform">
+          <h3>Agent workflow orchestration system</h3>
+          <p>Building structured agent pipelines with tool use, state tracking, and policy-driven decision points.</p>
+          <span class="meta">agentic · reliability</span>
+        </a>
+        <a href="/projects/shield.html" class="tile" data-tags="observability evaluation agentic">
+          <h3>AI behavior observability toolkit</h3>
+          <p>Creating logging and tracing patterns that make agent decisions explainable and debuggable.</p>
+          <span class="meta">observability · evaluation · agentic</span>
+        </a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Evren Yortuc — yortuc.com</p>
+  </footer>
+  <script src="/js/site.js"></script>
+</body>
+</html>

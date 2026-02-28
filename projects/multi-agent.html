@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent workflow orchestration system — yortuc</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="/" class="site-logo">yortuc</a>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/projects/" aria-current="page">Projects</a>
+        <a href="/writing/">Writing</a>
+        <a href="/talks.html">Talks</a>
+        <a href="/about.html">About</a>
+        <a href="/resume.html">Resume</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button type="button" class="theme-toggle" aria-label="Switch to dark mode">☾</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <a href="/projects/" class="back-link prose">← Projects</a>
+
+    <article class="prose">
+      <h1>Agent workflow orchestration system</h1>
+      <p><strong>Building structured agent pipelines with tool use, state tracking, and policy-driven decision points.</strong></p>
+      <p><span class="meta">agentic · reliability</span></p>
+
+      <h2>Problem</h2>
+      <p>Autonomous workflows at scale require multiple specialized agents—reasoning, tool use, diagnostics, remediation—working in sequence or parallel. We needed a framework to register agents, decompose high-level goals into tasks, plan execution, and coordinate with clear observability and guardrails.</p>
+
+      <h2>Approach</h2>
+      <p>An orchestration layer with an agent registry (capabilities and interfaces), a planner that produces a task graph from a goal, and an executor that runs the graph with retries, timeouts, and policy checks. Evaluation is done via scenario-based simulation before production.</p>
+
+      <h2>Key contributions</h2>
+      <ul>
+        <li>Agent registry and planner that decompose goals into a structured task graph.</li>
+        <li>Orchestrator with state tracking, tool use, and policy-driven decision points.</li>
+        <li>Integration with guardrails and observability so every step is traceable and safe.</li>
+      </ul>
+
+      <h2>What made it interesting</h2>
+      <ul>
+        <li>Designing task decomposition so the planner stays robust as scope grows.</li>
+        <li>Balancing autonomy (fewer human touchpoints) with reliability (escalation, guardrails).</li>
+      </ul>
+
+      <h2>What I'd improve next</h2>
+      <ul>
+        <li>Richer task decomposition: hierarchical plans, conditional branches.</li>
+        <li>Agent handoff protocols and shared context formats for cross-agent workflows.</li>
+      </ul>
+
+      <p><a href="/talks.html">See talks</a> for related presentations.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Evren Yortuc — yortuc.com</p>
+  </footer>
+  <script src="/js/site.js"></script>
+</body>
+</html>
