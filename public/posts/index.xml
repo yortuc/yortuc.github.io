@@ -2,18 +2,34 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on yortuc</title>
-    <link>https://yortuc.github.io/posts/</link>
+    <link>http://localhost:61729/posts/</link>
     <description>Recent content in Posts on yortuc</description>
     <generator>Hugo -- 0.157.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 Feb 2026 18:01:22 -0800</lastBuildDate>
-    <atom:link href="https://yortuc.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Mar 2026 08:42:44 -0800</lastBuildDate>
+    <atom:link href="http://localhost:61729/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Defending Shell Execution Agents: What Can Go Wrong?</title>
+      <link>http://localhost:61729/posts/defending-shell-execution-agents/</link>
+      <pubDate>Sun, 01 Mar 2026 08:42:44 -0800</pubDate>
+      <guid>http://localhost:61729/posts/defending-shell-execution-agents/</guid>
+      <description>&lt;p&gt;Agents with shell execution capabilities are everywhere now—from general-purpose CLI assistants that help with development tasks, to IT support bots that diagnose system issues, to DevOps agents that automate deployments, to security compliance agents that enforce policies across fleets. These agents execute PowerShell on Windows, bash on Linux, or zsh on macOS to accomplish their tasks.&lt;/p&gt;
+&lt;p&gt;But this power comes with serious risks. When an agent can run shell commands on your behalf, you&amp;rsquo;re giving an AI system direct access to your machine. Whether it&amp;rsquo;s helping you debug code, troubleshooting a printer, deploying infrastructure, or checking compliance, the attack surface is the same.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Simulation for Agentic Evaluation</title>
-      <link>https://yortuc.github.io/posts/simulation-for-agentic-evaluation/</link>
+      <link>http://localhost:61729/posts/simulation-for-agentic-evaluation/</link>
       <pubDate>Fri, 27 Feb 2026 18:01:22 -0800</pubDate>
-      <guid>https://yortuc.github.io/posts/simulation-for-agentic-evaluation/</guid>
+      <guid>http://localhost:61729/posts/simulation-for-agentic-evaluation/</guid>
       <description>&lt;p&gt;Evaluating AI agents presents fundamentally different challenges compared to traditional software testing. Traditional software follows deterministic paths—given the same input, you get the same output. You can write unit tests, integration tests, and measure code coverage with confidence. But agents are non-deterministic by nature. They make decisions based on LLM outputs that vary between runs, they interact with external systems in unpredictable ways, and they can take multiple valid paths to solve the same problem. You can&amp;rsquo;t simply assert that function X returns value Y. Instead, you need to evaluate whether the agent achieved the intended outcome, regardless of how it got there. This shift from testing execution paths to evaluating goal achievement requires entirely new evaluation frameworks—and that&amp;rsquo;s where simulation comes in.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Shell Execution in AI Agents: Why Text Filters Fail and AST Policy Wins</title>
+      <link>http://localhost:61729/posts/shell-execution-ai-agents-ast-policy/</link>
+      <pubDate>Fri, 27 Feb 2026 12:26:59 -0800</pubDate>
+      <guid>http://localhost:61729/posts/shell-execution-ai-agents-ast-policy/</guid>
+      <description>&lt;p&gt;We are in the &amp;ldquo;hold my beer&amp;rdquo; phase of AI agents. Tools like OpenClaw proved that LLMs can use a terminal effectively. In enterprise environments, that is both impressive and dangerous. One bad &lt;code&gt;rm -rf&lt;/code&gt;, one obfuscated &lt;code&gt;Invoke-Expression&lt;/code&gt; (a PowerShell command that executes a string as code), or one injected encoded payload can turn an assistant into a SEV-1 generator.&lt;/p&gt;
+&lt;p&gt;For clarity, we use Windows/PowerShell examples throughout this post, but the core safety principles apply to shell execution on any platform.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

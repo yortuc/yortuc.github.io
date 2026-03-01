@@ -2,17 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://yortuc.github.io/posts/</loc>
+    <loc>http://localhost:61729/posts/defending-shell-execution-agents/</loc>
+    <lastmod>2026-03-01T08:42:44-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:61729/posts/</loc>
+    <lastmod>2026-03-01T08:42:44-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:61729/</loc>
+    <lastmod>2026-03-01T08:42:44-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:61729/posts/simulation-for-agentic-evaluation/</loc>
     <lastmod>2026-02-27T18:01:22-08:00</lastmod>
   </url><url>
-    <loc>https://yortuc.github.io/posts/simulation-for-agentic-evaluation/</loc>
-    <lastmod>2026-02-27T18:01:22-08:00</lastmod>
+    <loc>http://localhost:61729/posts/shell-execution-ai-agents-ast-policy/</loc>
+    <lastmod>2026-02-27T12:26:59-08:00</lastmod>
   </url><url>
-    <loc>https://yortuc.github.io/</loc>
-    <lastmod>2026-02-27T18:01:22-08:00</lastmod>
+    <loc>http://localhost:61729/categories/</loc>
   </url><url>
-    <loc>https://yortuc.github.io/categories/</loc>
-  </url><url>
-    <loc>https://yortuc.github.io/tags/</loc>
+    <loc>http://localhost:61729/tags/</loc>
   </url>
 </urlset>

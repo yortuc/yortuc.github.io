@@ -23,6 +23,39 @@ body {
 }
 
 .post-content {
+    padding-bottom: 30px;
+    border-bottom: 3px solid #444;
+}
+
+.footnotes-section {
+    background-color: #f8f8f8;
+    border-left: 4px solid #666;
+    padding: 2em;
+    margin-top: 3em;
+    font-size: 0.95em;
+}
+
+.footnotes-section h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.references {
+    font-size: 0.9em;
+    line-height: 1.8;
+    margin-top: 2em;
+}
+
+.references span[id^="ref-"] {
+    font-weight: bold;
+    margin-right: 0.5em;
+}
+
+.references a {
+    word-break: break-all;
+}
+
+.post-content {
     font-size: 1.1rem;
     line-height: 1.8;
 }

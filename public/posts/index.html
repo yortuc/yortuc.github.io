@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="light">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=61729&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Posts | yortuc</title>
 <meta name="keywords" content="">
 <meta name="description" content="Posts - yortuc">
 <meta name="author" content="Evren">
-<link rel="canonical" href="https://yortuc.github.io/posts/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.8e53a4a2117f0668f835c6003a7ace043b4f3d6a7c2e6e8d81df8002926e2752.css" integrity="sha256-jlOkohF/Bmj4NcYAOnrOBDtPPWp8Lm6Ngd&#43;AApJuJ1I=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://yortuc.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://yortuc.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://yortuc.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://yortuc.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://yortuc.github.io/safari-pinned-tab.svg">
+<link rel="canonical" href="http://localhost:61729/posts/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b0b82f646ed10cd6563b6b6fd3ddab825b6c26e269c4ffad83949dccaea732ab.css" integrity="sha256-sLgvZG7RDNZWO2tv092rgltsJuJpxP&#43;tg5SdzK6nMqs=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:61729/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:61729/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:61729/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:61729/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:61729/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://yortuc.github.io/posts/index.xml" title="rss">
-<link rel="alternate" hreflang="en" href="https://yortuc.github.io/posts/">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:61729/posts/index.xml" title="rss">
+<link rel="alternate" hreflang="en" href="http://localhost:61729/posts/">
 <noscript>
     <style>
         #theme-toggle,
@@ -46,36 +46,13 @@
     text-align: center;
   }
 </style>
-<meta property="og:url" content="https://yortuc.github.io/posts/">
-  <meta property="og:site_name" content="yortuc">
-  <meta property="og:title" content="Posts">
-  <meta property="og:locale" content="en-us">
-  <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Posts">
-<meta name="twitter:description" content="">
 
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://yortuc.github.io/posts/"
-    }
-  ]
-}
-</script>
 </head>
 <body class="list" id="top">
     <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://yortuc.github.io/" accesskey="h" title="yortuc (Alt + H)">yortuc</a>
+            <a href="http://localhost:61729/" accesskey="h" title="yortuc (Alt + H)">yortuc</a>
             <div class="logo-switches">
             </div>
         </div>
@@ -84,11 +61,31 @@
     </nav>
 </header>
 <main class="main"> 
-<header class="page-header"><div class="breadcrumbs"><a href="https://yortuc.github.io/">Home</a></div>
+<header class="page-header"><div class="breadcrumbs"><a href="http://localhost:61729/">Home</a></div>
   <h1>
     Posts
   </h1>
 </header>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Defending Shell Execution Agents: What Can Go Wrong?
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Agents with shell execution capabilities are everywhere now—from general-purpose CLI assistants that help with development tasks, to IT support bots that diagnose system issues, to DevOps agents that automate deployments, to security compliance agents that enforce policies across fleets. These agents execute PowerShell on Windows, bash on Linux, or zsh on macOS to accomplish their tasks.
+But this power comes with serious risks. When an agent can run shell commands on your behalf, you’re giving an AI system direct access to your machine. Whether it’s helping you debug code, troubleshooting a printer, deploying infrastructure, or checking compliance, the attack surface is the same.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-03-01 08:42:44 -0800 PST'>March 1, 2026</span>&nbsp;·&nbsp;<span>11 min</span>&nbsp;·&nbsp;<span>Evren</span></footer>
+  <a class="entry-link" aria-label="post link to Defending Shell Execution Agents: What Can Go Wrong?" href="http://localhost:61729/posts/defending-shell-execution-agents/"></a>
+</article>
 
 <article class="post-entry"> 
   <header class="entry-header">
@@ -100,12 +97,32 @@
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2026-02-27 18:01:22 -0800 PST'>February 27, 2026</span>&nbsp;·&nbsp;<span>6 min</span>&nbsp;·&nbsp;<span>Evren</span></footer>
-  <a class="entry-link" aria-label="post link to Simulation for Agentic Evaluation" href="https://yortuc.github.io/posts/simulation-for-agentic-evaluation/"></a>
+  <a class="entry-link" aria-label="post link to Simulation for Agentic Evaluation" href="http://localhost:61729/posts/simulation-for-agentic-evaluation/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Shell Execution in AI Agents: Why Text Filters Fail and AST Policy Wins
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>We are in the “hold my beer” phase of AI agents. Tools like OpenClaw proved that LLMs can use a terminal effectively. In enterprise environments, that is both impressive and dangerous. One bad rm -rf, one obfuscated Invoke-Expression (a PowerShell command that executes a string as code), or one injected encoded payload can turn an assistant into a SEV-1 generator.
+For clarity, we use Windows/PowerShell examples throughout this post, but the core safety principles apply to shell execution on any platform.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-02-27 12:26:59 -0800 PST'>February 27, 2026</span>&nbsp;·&nbsp;<span>9 min</span>&nbsp;·&nbsp;<span>Evren</span></footer>
+  <a class="entry-link" aria-label="post link to Shell Execution in AI Agents: Why Text Filters Fail and AST Policy Wins" href="http://localhost:61729/posts/shell-execution-ai-agents-ast-policy/"></a>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://yortuc.github.io/">yortuc</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:61729/">yortuc</a></span> · 
 
     <span>
         Powered by
