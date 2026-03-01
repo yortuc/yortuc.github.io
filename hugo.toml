@@ -3,6 +3,7 @@ languageCode = 'en-us'
 title = 'yortuc'
 theme = 'PaperMod'
 disqusShortname = 'yortuc-blog'
+googleAnalytics = 'G-X8FTEB7CZJ'
 
 [params]
   ShowReadingTime = true
