@@ -1,6 +1,6 @@
 +++
 date = '2026-03-01T08:42:44-08:00'
-draft = true
+draft = false
 title = 'Securing Shell Execution Agents: From Validation to Custom DSLs'
 +++
 
